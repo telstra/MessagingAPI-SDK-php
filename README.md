@@ -52,7 +52,7 @@ $token = $client->auth()->authorize([OAuthScopeEnum::NSMS]);
 // the client is now authorized; you can use $client to make endpoint calls
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 # Class Reference
 
@@ -83,7 +83,7 @@ $provisioning->deleteSubscription();
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -118,7 +118,7 @@ $result = $provisioning->createSubscription($body);
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -145,7 +145,7 @@ $result = $provisioning->getSubscription();
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -194,7 +194,7 @@ $result = $messaging->createSendSMS($payload);
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -234,7 +234,7 @@ $result = $messaging->getSMSStatus($messageId);
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -285,7 +285,7 @@ $result = $messaging->createSendMMS($body);
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -326,7 +326,7 @@ $result = $messaging->getMMSStatus($messageid);
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
@@ -357,7 +357,7 @@ $result = $messaging->retrieveSMSResponses();
 
 ```
 
-See the documentation at [Dev.Telstra.com]https://dev.telstra.com/content/messaging-api for more information
+See the documentation at [Dev.Telstra.com](https://dev.telstra.com/content/messaging-api) for more information
 
 #### Errors
 
