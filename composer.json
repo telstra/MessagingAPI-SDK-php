@@ -1,0 +1,32 @@
+{
+    "name": "apimatic/telstramessagingapi",
+    "type": "library",
+    "description": " The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages. ",
+    "keywords": ["Telstra Messaging API","API","SDK"],
+    "homepage": "https://apimatic.io",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "APIMatic SDK Generator",
+            "email": "support@apimatic.io",
+            "homepage": "https://apimatic.io",
+            "role": "API Tool"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "mashape/unirest-php": "~3.0.1",
+        "apimatic/jsonmapper": "~1.2.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "TelstraMessagingAPILib\\": "src/"
+        }
+    }
+}
