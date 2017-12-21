@@ -44,6 +44,130 @@ class MessagingController extends BaseController
     }
 
     /**
+     * Retrieve SMS Responses
+     *
+     * @return mixed response from the API call
+     * @throws APIException Thrown if API call fails
+     */
+    public function retrieveSMSResponses()
+    {
+        //check or get oauth token
+        OAuthManager::getInstance()->checkAuthorization();
+
+        //the base uri for api requests
+        $_queryBuilder = Configuration::getBaseUri();
+        
+        //prepare query string for API call
+        $_queryBuilder = $_queryBuilder.'/messages/sms';
+
+        //validate and preprocess url
+        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
+
+        //prepare headers
+        $_headers = array (
+            'user-agent'    => 'APIMATIC 2.0',
+            'Accept'        => 'application/json',
+            'Authorization' => sprintf('Bearer %1$s', Configuration::$oAuthToken->accessToken)
+        );
+
+        //call on-before Http callback
+        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
+        }
+
+        //and invoke the API call request to fetch the response
+        $response = Request::get($_queryUrl, $_headers);
+
+        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
+        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
+
+        //call on-after Http callback
+        if ($this->getHttpCallBack() != null) {
+            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
+        }
+
+        //Error handling using HTTP status codes
+        if ($response->code == 400) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'Invalid or missing request parameters',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 401) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'Invalid or no credentials passed in the request',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 403) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'Authorization credentials passed and accepted but account does' .
+                'not have permission',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 404) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException('The requested URI does not exist', $_httpContext);
+        }
+
+        if ($response->code == 405) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'The requested resource does not support the supplied verb',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 415) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'API does not support the requested content type',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 422) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'The request is formed correctly, but due to some condition' .
+                'the request cannot be processed e.g. email is required and it is not provided' .
+                'in the request',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 501) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'The HTTP method being used has not yet been implemented for' .
+                'the requested resource',
+                $_httpContext
+            );
+        }
+
+        if ($response->code == 503) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'The service requested is currently unavailable',
+                $_httpContext
+            );
+        }
+
+        if (($response->code < 200) || ($response->code > 208)) {
+            throw new Exceptions\ErrorErrorErrorErrorErrorException(
+                'An internal error occurred when processing the request',
+                $_httpContext
+            );
+        }
+
+        //handle errors defined at the API level
+        $this->validateResponse($_httpResponse, $_httpContext);
+
+        $mapper = $this->getJsonMapper();
+
+        return $mapper->mapClass($response->body, 'TelstraMessagingAPILib\\Models\\InboundPollResponse');
+    }
+
+    /**
      * Send SMS
      *
      * @param Models\SendSMSRequest $payload A JSON or XML payload containing the recipient's phone number and text
@@ -557,129 +681,5 @@ class MessagingController extends BaseController
         $mapper = $this->getJsonMapper();
 
         return $mapper->mapClassArray($response->body, 'TelstraMessagingAPILib\\Models\\OutboundPollResponse');
-    }
-
-    /**
-     * Retrieve SMS Responses
-     *
-     * @return mixed response from the API call
-     * @throws APIException Thrown if API call fails
-     */
-    public function retrieveSMSResponses()
-    {
-        //check or get oauth token
-        OAuthManager::getInstance()->checkAuthorization();
-
-        //the base uri for api requests
-        $_queryBuilder = Configuration::getBaseUri();
-        
-        //prepare query string for API call
-        $_queryBuilder = $_queryBuilder.'/messages/sms';
-
-        //validate and preprocess url
-        $_queryUrl = APIHelper::cleanUrl($_queryBuilder);
-
-        //prepare headers
-        $_headers = array (
-            'user-agent'    => 'APIMATIC 2.0',
-            'Accept'        => 'application/json',
-            'Authorization' => sprintf('Bearer %1$s', Configuration::$oAuthToken->accessToken)
-        );
-
-        //call on-before Http callback
-        $_httpRequest = new HttpRequest(HttpMethod::GET, $_headers, $_queryUrl);
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnBeforeRequest($_httpRequest);
-        }
-
-        //and invoke the API call request to fetch the response
-        $response = Request::get($_queryUrl, $_headers);
-
-        $_httpResponse = new HttpResponse($response->code, $response->headers, $response->raw_body);
-        $_httpContext = new HttpContext($_httpRequest, $_httpResponse);
-
-        //call on-after Http callback
-        if ($this->getHttpCallBack() != null) {
-            $this->getHttpCallBack()->callOnAfterRequest($_httpContext);
-        }
-
-        //Error handling using HTTP status codes
-        if ($response->code == 400) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'Invalid or missing request parameters',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 401) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'Invalid or no credentials passed in the request',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 403) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'Authorization credentials passed and accepted but account does' .
-                'not have permission',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 404) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException('The requested URI does not exist', $_httpContext);
-        }
-
-        if ($response->code == 405) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'The requested resource does not support the supplied verb',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 415) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'API does not support the requested content type',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 422) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'The request is formed correctly, but due to some condition' .
-                'the request cannot be processed e.g. email is required and it is not provided' .
-                'in the request',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 501) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'The HTTP method being used has not yet been implemented for' .
-                'the requested resource',
-                $_httpContext
-            );
-        }
-
-        if ($response->code == 503) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'The service requested is currently unavailable',
-                $_httpContext
-            );
-        }
-
-        if (($response->code < 200) || ($response->code > 208)) {
-            throw new Exceptions\ErrorErrorErrorErrorErrorException(
-                'An internal error occurred when processing the request',
-                $_httpContext
-            );
-        }
-
-        //handle errors defined at the API level
-        $this->validateResponse($_httpResponse, $_httpContext);
-
-        $mapper = $this->getJsonMapper();
-
-        return $mapper->mapClass($response->body, 'TelstraMessagingAPILib\\Models\\InboundPollResponse');
     }
 }

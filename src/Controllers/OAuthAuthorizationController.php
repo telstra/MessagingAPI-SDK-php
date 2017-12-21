@@ -79,6 +79,9 @@ class OAuthAuthorizationController extends BaseController
             'grant_type'    => 'client_credentials',
             'scope'         => $scope
         );
+        if (isset($fieldParameters)) {
+            $_parameters = array_merge($_parameters, $fieldParameters);
+        }
 
         //call on-before Http callback
         $_httpRequest = new HttpRequest(HttpMethod::POST, $_headers, $_queryUrl, $_parameters);

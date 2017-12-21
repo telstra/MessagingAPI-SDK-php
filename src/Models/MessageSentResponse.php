@@ -17,7 +17,7 @@ class MessageSentResponse implements JsonSerializable
     /**
      * @todo Write general description for this property
      * @required
-     * @var Message[] $messages public property
+     * @var \TelstraMessagingAPILib\Models\Message[] $messages public property
      */
     public $messages;
 

@@ -52,7 +52,7 @@ class SendMMSRequest implements JsonSerializable
      * message will be sent as an MMS.
      * @required
      * @maps MMSContent
-     * @var MMSContent[] $mMSContent public property
+     * @var \TelstraMessagingAPILib\Models\MMSContent[] $mMSContent public property
      */
     public $mMSContent;
 

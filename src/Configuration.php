@@ -65,7 +65,7 @@ class Configuration
     private static $environmentsMap = array(
         Environments::PRODUCTION => array(
             Servers::DEFAULT_ => 'https://tapi.telstra.com/v2',
-            Servers::ACCESS_TOKEN_SERVER => 'https://sapi.telstra.com/v1/oauth',
+            Servers::ACCESS_TOKEN_SERVER => 'https://tapi.telstra.com/v1/oauth',
         ),
     );
 }

@@ -18,7 +18,7 @@ class OAuthProviderException extends APIException
     /**
      * Error code
      * @required
-     * @var \TelstraMessagingAPILib\Models\string $error public property
+     * @var string $error public property
      */
     public $error;
 
