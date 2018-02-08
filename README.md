@@ -33,7 +33,9 @@ Then run `composer install`
 
 Download the files and include `autoload.php`:
 
-```php
+```
+require_once(__DIR__ . '/vendor/autoload.php');
+
 ```
 
 ## Tests
