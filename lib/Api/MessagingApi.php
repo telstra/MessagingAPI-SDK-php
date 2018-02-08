@@ -91,7 +91,7 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\OutboundPollResponse
+     * @return \Telstra_Messaging\Model\OutboundPollResponse[]
      */
     public function getMMSStatus($messageid)
     {
@@ -108,11 +108,11 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\OutboundPollResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\OutboundPollResponse[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getMMSStatusWithHttpInfo($messageid)
     {
-        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse';
+        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse[]';
         $request = $this->getMMSStatusRequest($messageid);
 
         try {
@@ -164,7 +164,7 @@ class MessagingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\OutboundPollResponse',
+                        '\Telstra_Messaging\Model\OutboundPollResponse[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -206,7 +206,7 @@ class MessagingApi
      */
     public function getMMSStatusAsyncWithHttpInfo($messageid)
     {
-        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse';
+        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse[]';
         $request = $this->getMMSStatusRequest($messageid);
 
         return $this->client
@@ -357,7 +357,7 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\OutboundPollResponse
+     * @return \Telstra_Messaging\Model\OutboundPollResponse[]
      */
     public function getSMSStatus($message_id)
     {
@@ -374,11 +374,11 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\OutboundPollResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\OutboundPollResponse[], HTTP status code, HTTP response headers (array of strings)
      */
     public function getSMSStatusWithHttpInfo($message_id)
     {
-        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse';
+        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse[]';
         $request = $this->getSMSStatusRequest($message_id);
 
         try {
@@ -430,7 +430,7 @@ class MessagingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\OutboundPollResponse',
+                        '\Telstra_Messaging\Model\OutboundPollResponse[]',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -472,7 +472,7 @@ class MessagingApi
      */
     public function getSMSStatusAsyncWithHttpInfo($message_id)
     {
-        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse';
+        $returnType = '\Telstra_Messaging\Model\OutboundPollResponse[]';
         $request = $this->getSMSStatusRequest($message_id);
 
         return $this->client
@@ -622,7 +622,7 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\InboundPollResponse[]
+     * @return \Telstra_Messaging\Model\InboundPollResponse
      */
     public function retrieveSMSResponses()
     {
@@ -638,11 +638,11 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\InboundPollResponse[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\InboundPollResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function retrieveSMSResponsesWithHttpInfo()
     {
-        $returnType = '\Telstra_Messaging\Model\InboundPollResponse[]';
+        $returnType = '\Telstra_Messaging\Model\InboundPollResponse';
         $request = $this->retrieveSMSResponsesRequest();
 
         try {
@@ -694,7 +694,7 @@ class MessagingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\InboundPollResponse[]',
+                        '\Telstra_Messaging\Model\InboundPollResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -734,7 +734,7 @@ class MessagingApi
      */
     public function retrieveSMSResponsesAsyncWithHttpInfo()
     {
-        $returnType = '\Telstra_Messaging\Model\InboundPollResponse[]';
+        $returnType = '\Telstra_Messaging\Model\InboundPollResponse';
         $request = $this->retrieveSMSResponsesRequest();
 
         return $this->client

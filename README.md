@@ -2,7 +2,7 @@ The Telstra SMS Messaging API allows your applications to send and receive SMS t
 
 
 - API version: 2.2.4
-- Package version: 1.0.1
+- Package version: 1.0.2
 
 ## Requirements
 
@@ -18,7 +18,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/telstra/MessagingAPI-SDK-php.git"
+      "url": "https://github.com/Telstra/Telstra_Messaging.git"
     }
   ],
   "require": {
@@ -33,9 +33,7 @@ Then run `composer install`
 
 Download the files and include `autoload.php`:
 
-```
-require_once(__DIR__ . '/vendor/autoload.php');
-
+```php
 ```
 
 ## Tests

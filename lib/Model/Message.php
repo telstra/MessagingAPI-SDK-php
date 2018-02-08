@@ -216,9 +216,6 @@ class Message implements ModelInterface, ArrayAccess
         if ($this->container['message_id'] === null) {
             $invalidProperties[] = "'message_id' can't be null";
         }
-        if ($this->container['message_status_url'] === null) {
-            $invalidProperties[] = "'message_status_url' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -238,9 +235,6 @@ class Message implements ModelInterface, ArrayAccess
             return false;
         }
         if ($this->container['message_id'] === null) {
-            return false;
-        }
-        if ($this->container['message_status_url'] === null) {
             return false;
         }
         return true;
