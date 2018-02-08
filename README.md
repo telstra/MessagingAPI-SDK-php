@@ -1,3 +1,4 @@
+# Telstra Messaging
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
@@ -18,11 +19,11 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/Telstra/Telstra_Messaging.git"
+      "url": "https://github.com/Telstra/MessagingAPI-SDK-php.git"
     }
   ],
   "require": {
-    "Telstra/Telstra_Messaging": "*@dev"
+    "Telstra/MessagingAPI-SDK-php": "*@master"
   }
 }
 ```
@@ -34,6 +35,7 @@ Then run `composer install`
 Download the files and include `autoload.php`:
 
 ```php
+    require_once('/path/to/vendor/autoload.php');
 ```
 
 ## Tests
