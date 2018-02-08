@@ -18,7 +18,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/Telstra/Telstra_Messaging.git"
+      "url": "https://github.com/telstra/MessagingAPI-SDK-php.git"
     }
   ],
   "require": {
