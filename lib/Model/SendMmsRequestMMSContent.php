@@ -1,6 +1,6 @@
 <?php
 /**
- * MMSContent
+ * SendMmsRequestMMSContent
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Telstra_Messaging\ObjectSerializer;
 
 /**
- * MMSContent Class Doc Comment
+ * SendMmsRequestMMSContent Class Doc Comment
  *
  * @category Class
  * @package  Telstra_Messaging
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class MMSContent implements ModelInterface, ArrayAccess
+class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class MMSContent implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'MMSContent';
+    protected static $swaggerModelName = 'SendMmsRequest_MMSContent';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

@@ -1,4 +1,4 @@
-# Telstra Messaging
+# Messaging SDK
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
@@ -95,6 +95,7 @@ Class | Method | HTTP request | Description
 
  - [ErrorError](docs/Model/ErrorError.md)
  - [ErrorErrorError](docs/Model/ErrorErrorError.md)
+ - [GetSubscriptionResponse](docs/Model/GetSubscriptionResponse.md)
  - [InboundPollResponse](docs/Model/InboundPollResponse.md)
  - [MMSContent](docs/Model/MMSContent.md)
  - [Message](docs/Model/Message.md)
@@ -110,14 +111,14 @@ Class | Method | HTTP request | Description
  - [Status](docs/Model/Status.md)
 
 
-## Documentation For Authorization
+## Documentation For Authorisation
 
 
 ## auth
 
 - **Type**: OAuth
 - **Flow**: application
-- **Authorization URL**: 
+- **Authorisation URL**: 
 - **Scopes**: 
  - **NSMS**: NSMS
 
