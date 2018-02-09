@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **getMMSStatus**
-> \Telstra_Messaging\Model\OutboundPollResponse getMMSStatus($messageid)
+> \Telstra_Messaging\Model\OutboundPollResponse[] getMMSStatus($messageid)
 
 Get MMS Status
 
@@ -51,7 +51,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Telstra_Messaging\Model\OutboundPollResponse**](../Model/OutboundPollResponse.md)
+[**\Telstra_Messaging\Model\OutboundPollResponse[]**](../Model/OutboundPollResponse.md)
 
 ### Authorization
 
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSMSStatus**
-> \Telstra_Messaging\Model\OutboundPollResponse getSMSStatus($message_id)
+> \Telstra_Messaging\Model\OutboundPollResponse[] getSMSStatus($message_id)
 
 Get SMS Status
 
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Telstra_Messaging\Model\OutboundPollResponse**](../Model/OutboundPollResponse.md)
+[**\Telstra_Messaging\Model\OutboundPollResponse[]**](../Model/OutboundPollResponse.md)
 
 ### Authorization
 
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **retrieveSMSResponses**
-> \Telstra_Messaging\Model\InboundPollResponse[] retrieveSMSResponses()
+> \Telstra_Messaging\Model\InboundPollResponse retrieveSMSResponses()
 
 Retrieve SMS Responses
 
@@ -153,7 +153,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Telstra_Messaging\Model\InboundPollResponse[]**](../Model/InboundPollResponse.md)
+[**\Telstra_Messaging\Model\InboundPollResponse**](../Model/InboundPollResponse.md)
 
 ### Authorization
 
@@ -167,7 +167,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **sendMMS**
-> object sendMMS($body)
+> \Telstra_Messaging\Model\MessageSentResponse sendMMS($body)
 
 Send MMS
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**\Telstra_Messaging\Model\MessageSentResponse**](../Model/MessageSentResponse.md)
 
 ### Authorization
 

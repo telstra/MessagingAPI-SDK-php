@@ -57,8 +57,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'active_days' => 'int',
-        'notify_url' => 'string',
         'destination_address' => 'string'
     ];
 
@@ -68,8 +66,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'active_days' => 'int32',
-        'notify_url' => null,
         'destination_address' => null
     ];
 
@@ -100,8 +96,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'active_days' => 'activeDays',
-        'notify_url' => 'notifyURL',
         'destination_address' => 'destinationAddress'
     ];
 
@@ -111,8 +105,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'active_days' => 'setActiveDays',
-        'notify_url' => 'setNotifyUrl',
         'destination_address' => 'setDestinationAddress'
     ];
 
@@ -122,8 +114,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'active_days' => 'getActiveDays',
-        'notify_url' => 'getNotifyUrl',
         'destination_address' => 'getDestinationAddress'
     ];
 
@@ -187,8 +177,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['active_days'] = isset($data['active_days']) ? $data['active_days'] : null;
-        $this->container['notify_url'] = isset($data['notify_url']) ? $data['notify_url'] : null;
         $this->container['destination_address'] = isset($data['destination_address']) ? $data['destination_address'] : null;
     }
 
@@ -201,15 +189,6 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['active_days'] === null) {
-            $invalidProperties[] = "'active_days' can't be null";
-        }
-        if ($this->container['notify_url'] === null) {
-            $invalidProperties[] = "'notify_url' can't be null";
-        }
-        if ($this->container['destination_address'] === null) {
-            $invalidProperties[] = "'destination_address' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -222,66 +201,9 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['active_days'] === null) {
-            return false;
-        }
-        if ($this->container['notify_url'] === null) {
-            return false;
-        }
-        if ($this->container['destination_address'] === null) {
-            return false;
-        }
         return true;
     }
 
-
-    /**
-     * Gets active_days
-     *
-     * @return int
-     */
-    public function getActiveDays()
-    {
-        return $this->container['active_days'];
-    }
-
-    /**
-     * Sets active_days
-     *
-     * @param int $active_days 
-     *
-     * @return $this
-     */
-    public function setActiveDays($active_days)
-    {
-        $this->container['active_days'] = $active_days;
-
-        return $this;
-    }
-
-    /**
-     * Gets notify_url
-     *
-     * @return string
-     */
-    public function getNotifyUrl()
-    {
-        return $this->container['notify_url'];
-    }
-
-    /**
-     * Sets notify_url
-     *
-     * @param string $notify_url 
-     *
-     * @return $this
-     */
-    public function setNotifyUrl($notify_url)
-    {
-        $this->container['notify_url'] = $notify_url;
-
-        return $this;
-    }
 
     /**
      * Gets destination_address

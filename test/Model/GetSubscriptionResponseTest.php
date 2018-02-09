@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvisionNumberResponseTest
+ * GetSubscriptionResponseTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Telstra_Messaging;
 
 /**
- * ProvisionNumberResponseTest Class Doc Comment
+ * GetSubscriptionResponseTest Class Doc Comment
  *
  * @category    Class */
-// * @description ProvisionNumberResponse
+// * @description GetSubscriptionResponse
 /**
  * @package     Telstra_Messaging
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
+class GetSubscriptionResponseTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,9 +71,23 @@ class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "ProvisionNumberResponse"
+     * Test "GetSubscriptionResponse"
      */
-    public function testProvisionNumberResponse()
+    public function testGetSubscriptionResponse()
+    {
+    }
+
+    /**
+     * Test attribute "active_days"
+     */
+    public function testPropertyActiveDays()
+    {
+    }
+
+    /**
+     * Test attribute "notify_url"
+     */
+    public function testPropertyNotifyUrl()
     {
     }
 

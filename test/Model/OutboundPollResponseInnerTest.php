@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvisionNumberResponseTest
+ * OutboundPollResponseInnerTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Telstra_Messaging;
 
 /**
- * ProvisionNumberResponseTest Class Doc Comment
+ * OutboundPollResponseInnerTest Class Doc Comment
  *
  * @category    Class */
-// * @description ProvisionNumberResponse
+// * @description OutboundPollResponseInner
 /**
  * @package     Telstra_Messaging
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
+class OutboundPollResponseInnerTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,16 +71,37 @@ class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "ProvisionNumberResponse"
+     * Test "OutboundPollResponseInner"
      */
-    public function testProvisionNumberResponse()
+    public function testOutboundPollResponseInner()
     {
     }
 
     /**
-     * Test attribute "destination_address"
+     * Test attribute "to"
      */
-    public function testPropertyDestinationAddress()
+    public function testPropertyTo()
+    {
+    }
+
+    /**
+     * Test attribute "received_timestamp"
+     */
+    public function testPropertyReceivedTimestamp()
+    {
+    }
+
+    /**
+     * Test attribute "sent_timestamp"
+     */
+    public function testPropertySentTimestamp()
+    {
+    }
+
+    /**
+     * Test attribute "delivery_status"
+     */
+    public function testPropertyDeliveryStatus()
     {
     }
 }

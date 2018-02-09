@@ -78,37 +78,30 @@ class InboundPollResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "to"
+     * Test attribute "status"
      */
-    public function testPropertyTo()
+    public function testPropertyStatus()
     {
     }
 
     /**
-     * Test attribute "from"
+     * Test attribute "destination_address"
      */
-    public function testPropertyFrom()
+    public function testPropertyDestinationAddress()
     {
     }
 
     /**
-     * Test attribute "body"
+     * Test attribute "sender_address"
      */
-    public function testPropertyBody()
+    public function testPropertySenderAddress()
     {
     }
 
     /**
-     * Test attribute "received_timestamp"
+     * Test attribute "message"
      */
-    public function testPropertyReceivedTimestamp()
-    {
-    }
-
-    /**
-     * Test attribute "more_messages"
-     */
-    public function testPropertyMoreMessages()
+    public function testPropertyMessage()
     {
     }
 
@@ -116,6 +109,13 @@ class InboundPollResponseTest extends \PHPUnit_Framework_TestCase
      * Test attribute "message_id"
      */
     public function testPropertyMessageId()
+    {
+    }
+
+    /**
+     * Test attribute "sent_timestamp"
+     */
+    public function testPropertySentTimestamp()
     {
     }
 }

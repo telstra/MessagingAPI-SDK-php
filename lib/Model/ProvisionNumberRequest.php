@@ -224,7 +224,7 @@ class ProvisionNumberRequest implements ModelInterface, ArrayAccess
     /**
      * Sets active_days
      *
-     * @param int $active_days 
+     * @param int $active_days Number of active days
      *
      * @return $this
      */
@@ -248,7 +248,7 @@ class ProvisionNumberRequest implements ModelInterface, ArrayAccess
     /**
      * Sets notify_url
      *
-     * @param string $notify_url 
+     * @param string $notify_url Notify url
      *
      * @return $this
      */

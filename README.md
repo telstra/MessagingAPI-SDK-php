@@ -1,8 +1,9 @@
+# Messaging SDK
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
 - API version: 2.2.4
-- Package version: 1.0.1
+- Package version: 1.0.2
 
 ## Requirements
 
@@ -18,11 +19,11 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
   "repositories": [
     {
       "type": "git",
-      "url": "https://github.com/telstra/MessagingAPI-SDK-php.git"
+      "url": "https://github.com/Telstra/MessagingAPI-SDK-php.git"
     }
   ],
   "require": {
-    "Telstra/Telstra_Messaging": "*@dev"
+    "Telstra/MessagingAPI-SDK-php": "*@master"
   }
 }
 ```
@@ -33,9 +34,8 @@ Then run `composer install`
 
 Download the files and include `autoload.php`:
 
-```
-require_once(__DIR__ . '/vendor/autoload.php');
-
+```php
+    require_once('/path/to/vendor/autoload.php');
 ```
 
 ## Tests
@@ -93,8 +93,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DeleteNumberRequest](docs/Model/DeleteNumberRequest.md)
  - [ErrorError](docs/Model/ErrorError.md)
  - [ErrorErrorError](docs/Model/ErrorErrorError.md)
+ - [GetSubscriptionResponse](docs/Model/GetSubscriptionResponse.md)
  - [InboundPollResponse](docs/Model/InboundPollResponse.md)
  - [MMSContent](docs/Model/MMSContent.md)
  - [Message](docs/Model/Message.md)
@@ -110,14 +112,14 @@ Class | Method | HTTP request | Description
  - [Status](docs/Model/Status.md)
 
 
-## Documentation For Authorization
+## Documentation For Authorisation
 
 
 ## auth
 
 - **Type**: OAuth
 - **Flow**: application
-- **Authorization URL**: 
+- **Authorisation URL**: 
 - **Scopes**: 
  - **NSMS**: NSMS
 

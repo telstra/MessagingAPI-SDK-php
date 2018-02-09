@@ -1,6 +1,6 @@
 <?php
 /**
- * Message
+ * DeleteNumberRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Telstra_Messaging\ObjectSerializer;
 
 /**
- * Message Class Doc Comment
+ * DeleteNumberRequest Class Doc Comment
  *
  * @category Class
  * @package  Telstra_Messaging
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Message implements ModelInterface, ArrayAccess
+class DeleteNumberRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Message implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Message';
+    protected static $swaggerModelName = 'DeleteNumberRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,7 @@ class Message implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'to' => 'string',
-        'delivery_status' => 'string',
-        'message_id' => 'string',
-        'message_status_url' => 'string'
+        'empty_arr' => 'int'
     ];
 
     /**
@@ -69,10 +66,7 @@ class Message implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'to' => null,
-        'delivery_status' => null,
-        'message_id' => null,
-        'message_status_url' => null
+        'empty_arr' => 'int32'
     ];
 
     /**
@@ -102,10 +96,7 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'to' => 'to',
-        'delivery_status' => 'deliveryStatus',
-        'message_id' => 'messageId',
-        'message_status_url' => 'messageStatusURL'
+        'empty_arr' => 'emptyArr'
     ];
 
     /**
@@ -114,10 +105,7 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'to' => 'setTo',
-        'delivery_status' => 'setDeliveryStatus',
-        'message_id' => 'setMessageId',
-        'message_status_url' => 'setMessageStatusUrl'
+        'empty_arr' => 'setEmptyArr'
     ];
 
     /**
@@ -126,10 +114,7 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'to' => 'getTo',
-        'delivery_status' => 'getDeliveryStatus',
-        'message_id' => 'getMessageId',
-        'message_status_url' => 'getMessageStatusUrl'
+        'empty_arr' => 'getEmptyArr'
     ];
 
     /**
@@ -192,10 +177,7 @@ class Message implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['to'] = isset($data['to']) ? $data['to'] : null;
-        $this->container['delivery_status'] = isset($data['delivery_status']) ? $data['delivery_status'] : null;
-        $this->container['message_id'] = isset($data['message_id']) ? $data['message_id'] : null;
-        $this->container['message_status_url'] = isset($data['message_status_url']) ? $data['message_status_url'] : null;
+        $this->container['empty_arr'] = isset($data['empty_arr']) ? $data['empty_arr'] : 0;
     }
 
     /**
@@ -207,15 +189,6 @@ class Message implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['to'] === null) {
-            $invalidProperties[] = "'to' can't be null";
-        }
-        if ($this->container['delivery_status'] === null) {
-            $invalidProperties[] = "'delivery_status' can't be null";
-        }
-        if ($this->container['message_id'] === null) {
-            $invalidProperties[] = "'message_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -228,111 +201,30 @@ class Message implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['to'] === null) {
-            return false;
-        }
-        if ($this->container['delivery_status'] === null) {
-            return false;
-        }
-        if ($this->container['message_id'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets to
+     * Gets empty_arr
      *
-     * @return string
+     * @return int
      */
-    public function getTo()
+    public function getEmptyArr()
     {
-        return $this->container['to'];
+        return $this->container['empty_arr'];
     }
 
     /**
-     * Sets to
+     * Sets empty_arr
      *
-     * @param string $to 
+     * @param int $empty_arr Empty Arr
      *
      * @return $this
      */
-    public function setTo($to)
+    public function setEmptyArr($empty_arr)
     {
-        $this->container['to'] = $to;
-
-        return $this;
-    }
-
-    /**
-     * Gets delivery_status
-     *
-     * @return string
-     */
-    public function getDeliveryStatus()
-    {
-        return $this->container['delivery_status'];
-    }
-
-    /**
-     * Sets delivery_status
-     *
-     * @param string $delivery_status 
-     *
-     * @return $this
-     */
-    public function setDeliveryStatus($delivery_status)
-    {
-        $this->container['delivery_status'] = $delivery_status;
-
-        return $this;
-    }
-
-    /**
-     * Gets message_id
-     *
-     * @return string
-     */
-    public function getMessageId()
-    {
-        return $this->container['message_id'];
-    }
-
-    /**
-     * Sets message_id
-     *
-     * @param string $message_id 
-     *
-     * @return $this
-     */
-    public function setMessageId($message_id)
-    {
-        $this->container['message_id'] = $message_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets message_status_url
-     *
-     * @return string
-     */
-    public function getMessageStatusUrl()
-    {
-        return $this->container['message_status_url'];
-    }
-
-    /**
-     * Sets message_status_url
-     *
-     * @param string $message_status_url 
-     *
-     * @return $this
-     */
-    public function setMessageStatusUrl($message_status_url)
-    {
-        $this->container['message_status_url'] = $message_status_url;
+        $this->container['empty_arr'] = $empty_arr;
 
         return $this;
     }

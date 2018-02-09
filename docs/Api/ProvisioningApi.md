@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **createSubscription**
-> \Telstra_Messaging\Model\ProvisionNumberResponse createSubscription($authorization, $body)
+> \Telstra_Messaging\Model\ProvisionNumberResponse createSubscription($body)
 
 Create Subscription
 
@@ -30,11 +30,10 @@ $apiInstance = new Telstra_Messaging\Api\ProvisioningApi(
     new GuzzleHttp\Client(),
     $config
 );
-$authorization = "authorization_example"; // string | An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION' scope.
 $body = new \Telstra_Messaging\Model\ProvisionNumberRequest(); // \Telstra_Messaging\Model\ProvisionNumberRequest | A JSON payload containing the required attributes
 
 try {
-    $result = $apiInstance->createSubscription($authorization, $body);
+    $result = $apiInstance->createSubscription($body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProvisioningApi->createSubscription: ', $e->getMessage(), PHP_EOL;
@@ -46,7 +45,6 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **string**| An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. |
  **body** | [**\Telstra_Messaging\Model\ProvisionNumberRequest**](../Model/ProvisionNumberRequest.md)| A JSON payload containing the required attributes |
 
 ### Return type
@@ -65,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **deleteSubscription**
-> deleteSubscription($authorization)
+> deleteSubscription($body)
 
 Delete Subscription
 
@@ -85,10 +83,10 @@ $apiInstance = new Telstra_Messaging\Api\ProvisioningApi(
     new GuzzleHttp\Client(),
     $config
 );
-$authorization = "authorization_example"; // string | An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION' scope.
+$body = new \Telstra_Messaging\Model\DeleteNumberRequest(); // \Telstra_Messaging\Model\DeleteNumberRequest | EmptyArr
 
 try {
-    $apiInstance->deleteSubscription($authorization);
+    $apiInstance->deleteSubscription($body);
 } catch (Exception $e) {
     echo 'Exception when calling ProvisioningApi->deleteSubscription: ', $e->getMessage(), PHP_EOL;
 }
@@ -99,7 +97,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | **string**| An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. |
+ **body** | [**\Telstra_Messaging\Model\DeleteNumberRequest**](../Model/DeleteNumberRequest.md)| EmptyArr |
 
 ### Return type
 
@@ -117,7 +115,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSubscription**
-> \Telstra_Messaging\Model\ProvisionNumberResponse[] getSubscription($authorization)
+> \Telstra_Messaging\Model\GetSubscriptionResponse getSubscription()
 
 Get Subscription
 
@@ -137,10 +135,9 @@ $apiInstance = new Telstra_Messaging\Api\ProvisioningApi(
     new GuzzleHttp\Client(),
     $config
 );
-$authorization = "authorization_example"; // string | An OAUTH bearer token that is entitled to use the 'SUBSCRIPTION' scope.
 
 try {
-    $result = $apiInstance->getSubscription($authorization);
+    $result = $apiInstance->getSubscription();
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProvisioningApi->getSubscription: ', $e->getMessage(), PHP_EOL;
@@ -149,14 +146,11 @@ try {
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **string**| An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. |
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**\Telstra_Messaging\Model\ProvisionNumberResponse[]**](../Model/ProvisionNumberResponse.md)
+[**\Telstra_Messaging\Model\GetSubscriptionResponse**](../Model/GetSubscriptionResponse.md)
 
 ### Authorization
 

@@ -58,12 +58,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'to' => 'string',
-        'from' => 'string',
-        'body' => 'string',
-        'received_timestamp' => 'string',
-        'more_messages' => 'int',
-        'message_id' => 'string'
+        'status' => 'string',
+        'destination_address' => 'string',
+        'sender_address' => 'string',
+        'message' => 'string',
+        'message_id' => 'string',
+        'sent_timestamp' => 'string'
     ];
 
     /**
@@ -72,12 +72,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'to' => null,
-        'from' => null,
-        'body' => null,
-        'received_timestamp' => null,
-        'more_messages' => 'int32',
-        'message_id' => null
+        'status' => null,
+        'destination_address' => null,
+        'sender_address' => null,
+        'message' => null,
+        'message_id' => null,
+        'sent_timestamp' => null
     ];
 
     /**
@@ -107,12 +107,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'to' => 'to',
-        'from' => 'from',
-        'body' => 'body',
-        'received_timestamp' => 'receivedTimestamp',
-        'more_messages' => 'moreMessages',
-        'message_id' => 'messageId'
+        'status' => 'status',
+        'destination_address' => 'destinationAddress',
+        'sender_address' => 'senderAddress',
+        'message' => 'message',
+        'message_id' => 'messageId',
+        'sent_timestamp' => 'sentTimestamp'
     ];
 
     /**
@@ -121,12 +121,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'to' => 'setTo',
-        'from' => 'setFrom',
-        'body' => 'setBody',
-        'received_timestamp' => 'setReceivedTimestamp',
-        'more_messages' => 'setMoreMessages',
-        'message_id' => 'setMessageId'
+        'status' => 'setStatus',
+        'destination_address' => 'setDestinationAddress',
+        'sender_address' => 'setSenderAddress',
+        'message' => 'setMessage',
+        'message_id' => 'setMessageId',
+        'sent_timestamp' => 'setSentTimestamp'
     ];
 
     /**
@@ -135,12 +135,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'to' => 'getTo',
-        'from' => 'getFrom',
-        'body' => 'getBody',
-        'received_timestamp' => 'getReceivedTimestamp',
-        'more_messages' => 'getMoreMessages',
-        'message_id' => 'getMessageId'
+        'status' => 'getStatus',
+        'destination_address' => 'getDestinationAddress',
+        'sender_address' => 'getSenderAddress',
+        'message' => 'getMessage',
+        'message_id' => 'getMessageId',
+        'sent_timestamp' => 'getSentTimestamp'
     ];
 
     /**
@@ -203,12 +203,12 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['to'] = isset($data['to']) ? $data['to'] : null;
-        $this->container['from'] = isset($data['from']) ? $data['from'] : null;
-        $this->container['body'] = isset($data['body']) ? $data['body'] : null;
-        $this->container['received_timestamp'] = isset($data['received_timestamp']) ? $data['received_timestamp'] : null;
-        $this->container['more_messages'] = isset($data['more_messages']) ? $data['more_messages'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['destination_address'] = isset($data['destination_address']) ? $data['destination_address'] : null;
+        $this->container['sender_address'] = isset($data['sender_address']) ? $data['sender_address'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
         $this->container['message_id'] = isset($data['message_id']) ? $data['message_id'] : null;
+        $this->container['sent_timestamp'] = isset($data['sent_timestamp']) ? $data['sent_timestamp'] : null;
     }
 
     /**
@@ -237,121 +237,97 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets to
+     * Gets status
      *
      * @return string
      */
-    public function getTo()
+    public function getStatus()
     {
-        return $this->container['to'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets to
+     * Sets status
      *
-     * @param string $to The phone number (recipient) that the message was sent to(in E.164 format).
+     * @param string $status message status
      *
      * @return $this
      */
-    public function setTo($to)
+    public function setStatus($status)
     {
-        $this->container['to'] = $to;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets from
+     * Gets destination_address
      *
      * @return string
      */
-    public function getFrom()
+    public function getDestinationAddress()
     {
-        return $this->container['from'];
+        return $this->container['destination_address'];
     }
 
     /**
-     * Sets from
+     * Sets destination_address
      *
-     * @param string $from The phone number (sender) that the message was sent from (in E.164 format).
+     * @param string $destination_address The phone number (recipient) that the message was sent to(in E.164 format).
      *
      * @return $this
      */
-    public function setFrom($from)
+    public function setDestinationAddress($destination_address)
     {
-        $this->container['from'] = $from;
+        $this->container['destination_address'] = $destination_address;
 
         return $this;
     }
 
     /**
-     * Gets body
+     * Gets sender_address
      *
      * @return string
      */
-    public function getBody()
+    public function getSenderAddress()
     {
-        return $this->container['body'];
+        return $this->container['sender_address'];
     }
 
     /**
-     * Sets body
+     * Sets sender_address
      *
-     * @param string $body Text body of the message that was sent
+     * @param string $sender_address The phone number (sender) that the message was sent from (in E.164 format).
      *
      * @return $this
      */
-    public function setBody($body)
+    public function setSenderAddress($sender_address)
     {
-        $this->container['body'] = $body;
+        $this->container['sender_address'] = $sender_address;
 
         return $this;
     }
 
     /**
-     * Gets received_timestamp
+     * Gets message
      *
      * @return string
      */
-    public function getReceivedTimestamp()
+    public function getMessage()
     {
-        return $this->container['received_timestamp'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets received_timestamp
+     * Sets message
      *
-     * @param string $received_timestamp The date and time when the message was recieved by recipient.
+     * @param string $message Text of the message that was sent
      *
      * @return $this
      */
-    public function setReceivedTimestamp($received_timestamp)
+    public function setMessage($message)
     {
-        $this->container['received_timestamp'] = $received_timestamp;
-
-        return $this;
-    }
-
-    /**
-     * Gets more_messages
-     *
-     * @return int
-     */
-    public function getMoreMessages()
-    {
-        return $this->container['more_messages'];
-    }
-
-    /**
-     * Sets more_messages
-     *
-     * @param int $more_messages Indicates if there are more messages that can be polled from the server. 0=No more messages available. Anything else indicates there are more messages on the server.
-     *
-     * @return $this
-     */
-    public function setMoreMessages($more_messages)
-    {
-        $this->container['more_messages'] = $more_messages;
+        $this->container['message'] = $message;
 
         return $this;
     }
@@ -369,13 +345,37 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
     /**
      * Sets message_id
      *
-     * @param string $message_id Optional message ID of the SMS you sent. Use this ID to view the message status or get responses.
+     * @param string $message_id Message Id
      *
      * @return $this
      */
     public function setMessageId($message_id)
     {
         $this->container['message_id'] = $message_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets sent_timestamp
+     *
+     * @return string
+     */
+    public function getSentTimestamp()
+    {
+        return $this->container['sent_timestamp'];
+    }
+
+    /**
+     * Sets sent_timestamp
+     *
+     * @param string $sent_timestamp The date and time when the message was sent by recipient.
+     *
+     * @return $this
+     */
+    public function setSentTimestamp($sent_timestamp)
+    {
+        $this->container['sent_timestamp'] = $sent_timestamp;
 
         return $this;
     }

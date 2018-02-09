@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvisionNumberResponseTest
+ * DeleteNumberRequestTest
  *
  * PHP version 5
  *
@@ -30,16 +30,16 @@
 namespace Telstra_Messaging;
 
 /**
- * ProvisionNumberResponseTest Class Doc Comment
+ * DeleteNumberRequestTest Class Doc Comment
  *
  * @category    Class */
-// * @description ProvisionNumberResponse
+// * @description DeleteNumberRequest
 /**
  * @package     Telstra_Messaging
  * @author      Swagger Codegen team
  * @link        https://github.com/swagger-api/swagger-codegen
  */
-class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
+class DeleteNumberRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -71,16 +71,16 @@ class ProvisionNumberResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "ProvisionNumberResponse"
+     * Test "DeleteNumberRequest"
      */
-    public function testProvisionNumberResponse()
+    public function testDeleteNumberRequest()
     {
     }
 
     /**
-     * Test attribute "destination_address"
+     * Test attribute "empty_arr"
      */
-    public function testPropertyDestinationAddress()
+    public function testPropertyEmptyArr()
     {
     }
 }

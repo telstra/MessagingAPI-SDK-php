@@ -1,6 +1,6 @@
 {
-    "name": "Telstra/Telstra_Messaging",
-    "version": "1.0.1",
+    "name": "Telstra/MessagingAPI-SDK-php",
+    "version": "1.0.2",
     "description": "",
     "keywords": [
         "swagger",

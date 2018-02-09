@@ -1,6 +1,6 @@
 <?php
 /**
- * Message
+ * GetSubscriptionResponse
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Telstra_Messaging\ObjectSerializer;
 
 /**
- * Message Class Doc Comment
+ * GetSubscriptionResponse Class Doc Comment
  *
  * @category Class
  * @package  Telstra_Messaging
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Message implements ModelInterface, ArrayAccess
+class GetSubscriptionResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Message implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Message';
+    protected static $swaggerModelName = 'GetSubscriptionResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class Message implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'to' => 'string',
-        'delivery_status' => 'string',
-        'message_id' => 'string',
-        'message_status_url' => 'string'
+        'active_days' => 'string',
+        'notify_url' => 'string',
+        'destination_address' => 'string'
     ];
 
     /**
@@ -69,10 +68,9 @@ class Message implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'to' => null,
-        'delivery_status' => null,
-        'message_id' => null,
-        'message_status_url' => null
+        'active_days' => null,
+        'notify_url' => null,
+        'destination_address' => null
     ];
 
     /**
@@ -102,10 +100,9 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'to' => 'to',
-        'delivery_status' => 'deliveryStatus',
-        'message_id' => 'messageId',
-        'message_status_url' => 'messageStatusURL'
+        'active_days' => 'activeDays',
+        'notify_url' => 'notifyURL',
+        'destination_address' => 'destinationAddress'
     ];
 
     /**
@@ -114,10 +111,9 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'to' => 'setTo',
-        'delivery_status' => 'setDeliveryStatus',
-        'message_id' => 'setMessageId',
-        'message_status_url' => 'setMessageStatusUrl'
+        'active_days' => 'setActiveDays',
+        'notify_url' => 'setNotifyUrl',
+        'destination_address' => 'setDestinationAddress'
     ];
 
     /**
@@ -126,10 +122,9 @@ class Message implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'to' => 'getTo',
-        'delivery_status' => 'getDeliveryStatus',
-        'message_id' => 'getMessageId',
-        'message_status_url' => 'getMessageStatusUrl'
+        'active_days' => 'getActiveDays',
+        'notify_url' => 'getNotifyUrl',
+        'destination_address' => 'getDestinationAddress'
     ];
 
     /**
@@ -192,10 +187,9 @@ class Message implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['to'] = isset($data['to']) ? $data['to'] : null;
-        $this->container['delivery_status'] = isset($data['delivery_status']) ? $data['delivery_status'] : null;
-        $this->container['message_id'] = isset($data['message_id']) ? $data['message_id'] : null;
-        $this->container['message_status_url'] = isset($data['message_status_url']) ? $data['message_status_url'] : null;
+        $this->container['active_days'] = isset($data['active_days']) ? $data['active_days'] : null;
+        $this->container['notify_url'] = isset($data['notify_url']) ? $data['notify_url'] : null;
+        $this->container['destination_address'] = isset($data['destination_address']) ? $data['destination_address'] : null;
     }
 
     /**
@@ -207,15 +201,6 @@ class Message implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['to'] === null) {
-            $invalidProperties[] = "'to' can't be null";
-        }
-        if ($this->container['delivery_status'] === null) {
-            $invalidProperties[] = "'delivery_status' can't be null";
-        }
-        if ($this->container['message_id'] === null) {
-            $invalidProperties[] = "'message_id' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -228,111 +213,78 @@ class Message implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['to'] === null) {
-            return false;
-        }
-        if ($this->container['delivery_status'] === null) {
-            return false;
-        }
-        if ($this->container['message_id'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets to
+     * Gets active_days
      *
      * @return string
      */
-    public function getTo()
+    public function getActiveDays()
     {
-        return $this->container['to'];
+        return $this->container['active_days'];
     }
 
     /**
-     * Sets to
+     * Sets active_days
      *
-     * @param string $to 
+     * @param string $active_days Number of active days
      *
      * @return $this
      */
-    public function setTo($to)
+    public function setActiveDays($active_days)
     {
-        $this->container['to'] = $to;
+        $this->container['active_days'] = $active_days;
 
         return $this;
     }
 
     /**
-     * Gets delivery_status
+     * Gets notify_url
      *
      * @return string
      */
-    public function getDeliveryStatus()
+    public function getNotifyUrl()
     {
-        return $this->container['delivery_status'];
+        return $this->container['notify_url'];
     }
 
     /**
-     * Sets delivery_status
+     * Sets notify_url
      *
-     * @param string $delivery_status 
+     * @param string $notify_url Notify url configured
      *
      * @return $this
      */
-    public function setDeliveryStatus($delivery_status)
+    public function setNotifyUrl($notify_url)
     {
-        $this->container['delivery_status'] = $delivery_status;
+        $this->container['notify_url'] = $notify_url;
 
         return $this;
     }
 
     /**
-     * Gets message_id
+     * Gets destination_address
      *
      * @return string
      */
-    public function getMessageId()
+    public function getDestinationAddress()
     {
-        return $this->container['message_id'];
+        return $this->container['destination_address'];
     }
 
     /**
-     * Sets message_id
+     * Sets destination_address
      *
-     * @param string $message_id 
+     * @param string $destination_address The mobile phone number that was allocated
      *
      * @return $this
      */
-    public function setMessageId($message_id)
+    public function setDestinationAddress($destination_address)
     {
-        $this->container['message_id'] = $message_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets message_status_url
-     *
-     * @return string
-     */
-    public function getMessageStatusUrl()
-    {
-        return $this->container['message_status_url'];
-    }
-
-    /**
-     * Sets message_status_url
-     *
-     * @param string $message_status_url 
-     *
-     * @return $this
-     */
-    public function setMessageStatusUrl($message_status_url)
-    {
-        $this->container['message_status_url'] = $message_status_url;
+        $this->container['destination_address'] = $destination_address;
 
         return $this;
     }
