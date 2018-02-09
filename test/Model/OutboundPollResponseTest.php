@@ -76,4 +76,32 @@ class OutboundPollResponseTest extends \PHPUnit_Framework_TestCase
     public function testOutboundPollResponse()
     {
     }
+
+    /**
+     * Test attribute "to"
+     */
+    public function testPropertyTo()
+    {
+    }
+
+    /**
+     * Test attribute "received_timestamp"
+     */
+    public function testPropertyReceivedTimestamp()
+    {
+    }
+
+    /**
+     * Test attribute "sent_timestamp"
+     */
+    public function testPropertySentTimestamp()
+    {
+    }
+
+    /**
+     * Test attribute "delivery_status"
+     */
+    public function testPropertyDeliveryStatus()
+    {
+    }
 }

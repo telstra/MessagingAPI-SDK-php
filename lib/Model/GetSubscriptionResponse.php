@@ -1,6 +1,6 @@
 <?php
 /**
- * ProvisionNumberResponse
+ * GetSubscriptionResponse
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Telstra_Messaging\ObjectSerializer;
 
 /**
- * ProvisionNumberResponse Class Doc Comment
+ * GetSubscriptionResponse Class Doc Comment
  *
  * @category Class
  * @package  Telstra_Messaging
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class ProvisionNumberResponse implements ModelInterface, ArrayAccess
+class GetSubscriptionResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'ProvisionNumberResponse';
+    protected static $swaggerModelName = 'GetSubscriptionResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,6 +57,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'active_days' => 'string',
+        'notify_url' => 'string',
         'destination_address' => 'string'
     ];
 
@@ -66,6 +68,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'active_days' => null,
+        'notify_url' => null,
         'destination_address' => null
     ];
 
@@ -96,6 +100,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'active_days' => 'activeDays',
+        'notify_url' => 'notifyURL',
         'destination_address' => 'destinationAddress'
     ];
 
@@ -105,6 +111,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'active_days' => 'setActiveDays',
+        'notify_url' => 'setNotifyUrl',
         'destination_address' => 'setDestinationAddress'
     ];
 
@@ -114,6 +122,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'active_days' => 'getActiveDays',
+        'notify_url' => 'getNotifyUrl',
         'destination_address' => 'getDestinationAddress'
     ];
 
@@ -177,6 +187,8 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['active_days'] = isset($data['active_days']) ? $data['active_days'] : null;
+        $this->container['notify_url'] = isset($data['notify_url']) ? $data['notify_url'] : null;
         $this->container['destination_address'] = isset($data['destination_address']) ? $data['destination_address'] : null;
     }
 
@@ -204,6 +216,54 @@ class ProvisionNumberResponse implements ModelInterface, ArrayAccess
         return true;
     }
 
+
+    /**
+     * Gets active_days
+     *
+     * @return string
+     */
+    public function getActiveDays()
+    {
+        return $this->container['active_days'];
+    }
+
+    /**
+     * Sets active_days
+     *
+     * @param string $active_days Number of active days
+     *
+     * @return $this
+     */
+    public function setActiveDays($active_days)
+    {
+        $this->container['active_days'] = $active_days;
+
+        return $this;
+    }
+
+    /**
+     * Gets notify_url
+     *
+     * @return string
+     */
+    public function getNotifyUrl()
+    {
+        return $this->container['notify_url'];
+    }
+
+    /**
+     * Sets notify_url
+     *
+     * @param string $notify_url Notify url configured
+     *
+     * @return $this
+     */
+    public function setNotifyUrl($notify_url)
+    {
+        $this->container['notify_url'] = $notify_url;
+
+        return $this;
+    }
 
     /**
      * Gets destination_address

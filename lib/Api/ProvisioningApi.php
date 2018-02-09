@@ -87,16 +87,15 @@ class ProvisioningApi
      *
      * Create Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      * @param  \Telstra_Messaging\Model\ProvisionNumberRequest $body A JSON payload containing the required attributes (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Telstra_Messaging\Model\ProvisionNumberResponse
      */
-    public function createSubscription($authorization, $body)
+    public function createSubscription($body)
     {
-        list($response) = $this->createSubscriptionWithHttpInfo($authorization, $body);
+        list($response) = $this->createSubscriptionWithHttpInfo($body);
         return $response;
     }
 
@@ -105,17 +104,16 @@ class ProvisioningApi
      *
      * Create Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      * @param  \Telstra_Messaging\Model\ProvisionNumberRequest $body A JSON payload containing the required attributes (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Telstra_Messaging\Model\ProvisionNumberResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createSubscriptionWithHttpInfo($authorization, $body)
+    public function createSubscriptionWithHttpInfo($body)
     {
         $returnType = '\Telstra_Messaging\Model\ProvisionNumberResponse';
-        $request = $this->createSubscriptionRequest($authorization, $body);
+        $request = $this->createSubscriptionRequest($body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -163,7 +161,7 @@ class ProvisioningApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Telstra_Messaging\Model\ProvisionNumberResponse',
@@ -181,15 +179,14 @@ class ProvisioningApi
      *
      * Create Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      * @param  \Telstra_Messaging\Model\ProvisionNumberRequest $body A JSON payload containing the required attributes (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createSubscriptionAsync($authorization, $body)
+    public function createSubscriptionAsync($body)
     {
-        return $this->createSubscriptionAsyncWithHttpInfo($authorization, $body)
+        return $this->createSubscriptionAsyncWithHttpInfo($body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -202,16 +199,15 @@ class ProvisioningApi
      *
      * Create Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      * @param  \Telstra_Messaging\Model\ProvisionNumberRequest $body A JSON payload containing the required attributes (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createSubscriptionAsyncWithHttpInfo($authorization, $body)
+    public function createSubscriptionAsyncWithHttpInfo($body)
     {
         $returnType = '\Telstra_Messaging\Model\ProvisionNumberResponse';
-        $request = $this->createSubscriptionRequest($authorization, $body);
+        $request = $this->createSubscriptionRequest($body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -253,20 +249,13 @@ class ProvisioningApi
     /**
      * Create request for operation 'createSubscription'
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      * @param  \Telstra_Messaging\Model\ProvisionNumberRequest $body A JSON payload containing the required attributes (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createSubscriptionRequest($authorization, $body)
+    protected function createSubscriptionRequest($body)
     {
-        // verify the required parameter 'authorization' is set
-        if ($authorization === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $authorization when calling createSubscription'
-            );
-        }
         // verify the required parameter 'body' is set
         if ($body === null) {
             throw new \InvalidArgumentException(
@@ -281,10 +270,6 @@ class ProvisioningApi
         $httpBody = '';
         $multipart = false;
 
-        // header params
-        if ($authorization !== null) {
-            $headerParams['Authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
         // body params
@@ -363,15 +348,15 @@ class ProvisioningApi
      *
      * Delete Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
+     * @param  \Telstra_Messaging\Model\DeleteNumberRequest $body EmptyArr (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function deleteSubscription($authorization)
+    public function deleteSubscription($body)
     {
-        $this->deleteSubscriptionWithHttpInfo($authorization);
+        $this->deleteSubscriptionWithHttpInfo($body);
     }
 
     /**
@@ -379,16 +364,16 @@ class ProvisioningApi
      *
      * Delete Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
+     * @param  \Telstra_Messaging\Model\DeleteNumberRequest $body EmptyArr (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function deleteSubscriptionWithHttpInfo($authorization)
+    public function deleteSubscriptionWithHttpInfo($body)
     {
         $returnType = '';
-        $request = $this->deleteSubscriptionRequest($authorization);
+        $request = $this->deleteSubscriptionRequest($body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -432,14 +417,14 @@ class ProvisioningApi
      *
      * Delete Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
+     * @param  \Telstra_Messaging\Model\DeleteNumberRequest $body EmptyArr (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteSubscriptionAsync($authorization)
+    public function deleteSubscriptionAsync($body)
     {
-        return $this->deleteSubscriptionAsyncWithHttpInfo($authorization)
+        return $this->deleteSubscriptionAsyncWithHttpInfo($body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -452,15 +437,15 @@ class ProvisioningApi
      *
      * Delete Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
+     * @param  \Telstra_Messaging\Model\DeleteNumberRequest $body EmptyArr (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function deleteSubscriptionAsyncWithHttpInfo($authorization)
+    public function deleteSubscriptionAsyncWithHttpInfo($body)
     {
         $returnType = '';
-        $request = $this->deleteSubscriptionRequest($authorization);
+        $request = $this->deleteSubscriptionRequest($body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -488,17 +473,17 @@ class ProvisioningApi
     /**
      * Create request for operation 'deleteSubscription'
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
+     * @param  \Telstra_Messaging\Model\DeleteNumberRequest $body EmptyArr (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function deleteSubscriptionRequest($authorization)
+    protected function deleteSubscriptionRequest($body)
     {
-        // verify the required parameter 'authorization' is set
-        if ($authorization === null) {
+        // verify the required parameter 'body' is set
+        if ($body === null) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $authorization when calling deleteSubscription'
+                'Missing the required parameter $body when calling deleteSubscription'
             );
         }
 
@@ -509,14 +494,13 @@ class ProvisioningApi
         $httpBody = '';
         $multipart = false;
 
-        // header params
-        if ($authorization !== null) {
-            $headerParams['Authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
         // body params
         $_tempBody = null;
+        if (isset($body)) {
+            $_tempBody = $body;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -588,15 +572,14 @@ class ProvisioningApi
      *
      * Get Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\ProvisionNumberResponse[]
+     * @return \Telstra_Messaging\Model\GetSubscriptionResponse
      */
-    public function getSubscription($authorization)
+    public function getSubscription()
     {
-        list($response) = $this->getSubscriptionWithHttpInfo($authorization);
+        list($response) = $this->getSubscriptionWithHttpInfo();
         return $response;
     }
 
@@ -605,16 +588,15 @@ class ProvisioningApi
      *
      * Get Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\ProvisionNumberResponse[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\GetSubscriptionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getSubscriptionWithHttpInfo($authorization)
+    public function getSubscriptionWithHttpInfo()
     {
-        $returnType = '\Telstra_Messaging\Model\ProvisionNumberResponse[]';
-        $request = $this->getSubscriptionRequest($authorization);
+        $returnType = '\Telstra_Messaging\Model\GetSubscriptionResponse';
+        $request = $this->getSubscriptionRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -665,7 +647,7 @@ class ProvisioningApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\ProvisionNumberResponse[]',
+                        '\Telstra_Messaging\Model\GetSubscriptionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -680,14 +662,13 @@ class ProvisioningApi
      *
      * Get Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSubscriptionAsync($authorization)
+    public function getSubscriptionAsync()
     {
-        return $this->getSubscriptionAsyncWithHttpInfo($authorization)
+        return $this->getSubscriptionAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -700,15 +681,14 @@ class ProvisioningApi
      *
      * Get Subscription
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSubscriptionAsyncWithHttpInfo($authorization)
+    public function getSubscriptionAsyncWithHttpInfo()
     {
-        $returnType = '\Telstra_Messaging\Model\ProvisionNumberResponse[]';
-        $request = $this->getSubscriptionRequest($authorization);
+        $returnType = '\Telstra_Messaging\Model\GetSubscriptionResponse';
+        $request = $this->getSubscriptionRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -750,19 +730,12 @@ class ProvisioningApi
     /**
      * Create request for operation 'getSubscription'
      *
-     * @param  string $authorization An OAUTH bearer token that is entitled to use the &#39;SUBSCRIPTION&#39; scope. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getSubscriptionRequest($authorization)
+    protected function getSubscriptionRequest()
     {
-        // verify the required parameter 'authorization' is set
-        if ($authorization === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $authorization when calling getSubscription'
-            );
-        }
 
         $resourcePath = '/messages/provisioning/subscriptions';
         $formParams = [];
@@ -771,10 +744,6 @@ class ProvisioningApi
         $httpBody = '';
         $multipart = false;
 
-        // header params
-        if ($authorization !== null) {
-            $headerParams['Authorization'] = ObjectSerializer::toHeaderValue($authorization);
-        }
 
 
         // body params

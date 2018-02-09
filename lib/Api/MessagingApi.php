@@ -870,7 +870,7 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return object
+     * @return \Telstra_Messaging\Model\MessageSentResponse
      */
     public function sendMMS($body)
     {
@@ -887,11 +887,11 @@ class MessagingApi
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\MessageSentResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function sendMMSWithHttpInfo($body)
     {
-        $returnType = 'object';
+        $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
         $request = $this->sendMMSRequest($body);
 
         try {
@@ -940,10 +940,10 @@ class MessagingApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'object',
+                        '\Telstra_Messaging\Model\MessageSentResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -985,7 +985,7 @@ class MessagingApi
      */
     public function sendMMSAsyncWithHttpInfo($body)
     {
-        $returnType = 'object';
+        $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
         $request = $this->sendMMSRequest($body);
 
         return $this->client
@@ -1201,7 +1201,7 @@ class MessagingApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Telstra_Messaging\Model\MessageSentResponse',

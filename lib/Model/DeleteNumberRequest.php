@@ -1,6 +1,6 @@
 <?php
 /**
- * SendMmsRequestMMSContent
+ * DeleteNumberRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Telstra_Messaging\ObjectSerializer;
 
 /**
- * SendMmsRequestMMSContent Class Doc Comment
+ * DeleteNumberRequest Class Doc Comment
  *
  * @category Class
  * @package  Telstra_Messaging
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
+class DeleteNumberRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SendMmsRequest_MMSContent';
+    protected static $swaggerModelName = 'DeleteNumberRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +57,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'type' => 'string',
-        'filename' => 'string',
-        'payload' => 'string'
+        'empty_arr' => 'int'
     ];
 
     /**
@@ -68,9 +66,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'type' => null,
-        'filename' => null,
-        'payload' => null
+        'empty_arr' => 'int32'
     ];
 
     /**
@@ -100,9 +96,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'filename' => 'filename',
-        'payload' => 'payload'
+        'empty_arr' => 'emptyArr'
     ];
 
     /**
@@ -111,9 +105,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'filename' => 'setFilename',
-        'payload' => 'setPayload'
+        'empty_arr' => 'setEmptyArr'
     ];
 
     /**
@@ -122,9 +114,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'filename' => 'getFilename',
-        'payload' => 'getPayload'
+        'empty_arr' => 'getEmptyArr'
     ];
 
     /**
@@ -187,9 +177,7 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['filename'] = isset($data['filename']) ? $data['filename'] : null;
-        $this->container['payload'] = isset($data['payload']) ? $data['payload'] : null;
+        $this->container['empty_arr'] = isset($data['empty_arr']) ? $data['empty_arr'] : 0;
     }
 
     /**
@@ -201,15 +189,6 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['filename'] === null) {
-            $invalidProperties[] = "'filename' can't be null";
-        }
-        if ($this->container['payload'] === null) {
-            $invalidProperties[] = "'payload' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -222,87 +201,30 @@ class SendMmsRequestMMSContent implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['type'] === null) {
-            return false;
-        }
-        if ($this->container['filename'] === null) {
-            return false;
-        }
-        if ($this->container['payload'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets type
+     * Gets empty_arr
      *
-     * @return string
+     * @return int
      */
-    public function getType()
+    public function getEmptyArr()
     {
-        return $this->container['type'];
+        return $this->container['empty_arr'];
     }
 
     /**
-     * Sets type
+     * Sets empty_arr
      *
-     * @param string $type The following types are supported audio/amr  audio/aac  audio/mp3  audio/mpeg3  audio/mpeg  audio/mpg  audio/wav  audio/3gpp  audio/mp4  image/gif  image/jpeg  image/jpg  image/png  image/bmp  video/mpeg4  video/mp4  video/mpeg  video/3gpp  video/3gp  video/h263  text/plain  text/x-vCard  text/x-vCalendar
+     * @param int $empty_arr Empty Arr
      *
      * @return $this
      */
-    public function setType($type)
+    public function setEmptyArr($empty_arr)
     {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets filename
-     *
-     * @return string
-     */
-    public function getFilename()
-    {
-        return $this->container['filename'];
-    }
-
-    /**
-     * Sets filename
-     *
-     * @param string $filename The file name to be associated with the content. Some devices will display this file name with a placeholder for the content.
-     *
-     * @return $this
-     */
-    public function setFilename($filename)
-    {
-        $this->container['filename'] = $filename;
-
-        return $this;
-    }
-
-    /**
-     * Gets payload
-     *
-     * @return string
-     */
-    public function getPayload()
-    {
-        return $this->container['payload'];
-    }
-
-    /**
-     * Sets payload
-     *
-     * @param string $payload 
-     *
-     * @return $this
-     */
-    public function setPayload($payload)
-    {
-        $this->container['payload'] = $payload;
+        $this->container['empty_arr'] = $empty_arr;
 
         return $this;
     }

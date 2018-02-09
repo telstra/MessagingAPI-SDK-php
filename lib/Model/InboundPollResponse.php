@@ -62,6 +62,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         'destination_address' => 'string',
         'sender_address' => 'string',
         'message' => 'string',
+        'message_id' => 'string',
         'sent_timestamp' => 'string'
     ];
 
@@ -75,6 +76,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         'destination_address' => null,
         'sender_address' => null,
         'message' => null,
+        'message_id' => null,
         'sent_timestamp' => null
     ];
 
@@ -109,6 +111,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         'destination_address' => 'destinationAddress',
         'sender_address' => 'senderAddress',
         'message' => 'message',
+        'message_id' => 'messageId',
         'sent_timestamp' => 'sentTimestamp'
     ];
 
@@ -122,6 +125,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         'destination_address' => 'setDestinationAddress',
         'sender_address' => 'setSenderAddress',
         'message' => 'setMessage',
+        'message_id' => 'setMessageId',
         'sent_timestamp' => 'setSentTimestamp'
     ];
 
@@ -135,6 +139,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         'destination_address' => 'getDestinationAddress',
         'sender_address' => 'getSenderAddress',
         'message' => 'getMessage',
+        'message_id' => 'getMessageId',
         'sent_timestamp' => 'getSentTimestamp'
     ];
 
@@ -202,6 +207,7 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
         $this->container['destination_address'] = isset($data['destination_address']) ? $data['destination_address'] : null;
         $this->container['sender_address'] = isset($data['sender_address']) ? $data['sender_address'] : null;
         $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['message_id'] = isset($data['message_id']) ? $data['message_id'] : null;
         $this->container['sent_timestamp'] = isset($data['sent_timestamp']) ? $data['sent_timestamp'] : null;
     }
 
@@ -322,6 +328,30 @@ class InboundPollResponse implements ModelInterface, ArrayAccess
     public function setMessage($message)
     {
         $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets message_id
+     *
+     * @return string
+     */
+    public function getMessageId()
+    {
+        return $this->container['message_id'];
+    }
+
+    /**
+     * Sets message_id
+     *
+     * @param string $message_id Message Id
+     *
+     * @return $this
+     */
+    public function setMessageId($message_id)
+    {
+        $this->container['message_id'] = $message_id;
 
         return $this;
     }

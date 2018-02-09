@@ -61,7 +61,7 @@ class SendMmsRequest implements ModelInterface, ArrayAccess
         'to' => 'string',
         'subject' => 'string',
         'reply_request' => 'bool',
-        'mms_content' => '\Telstra_Messaging\Model\SendMmsRequestMMSContent[]'
+        'mms_content' => '\Telstra_Messaging\Model\MMSContent[]'
     ];
 
     /**
@@ -358,7 +358,7 @@ class SendMmsRequest implements ModelInterface, ArrayAccess
     /**
      * Gets mms_content
      *
-     * @return \Telstra_Messaging\Model\SendMmsRequestMMSContent[]
+     * @return \Telstra_Messaging\Model\MMSContent[]
      */
     public function getMmsContent()
     {
@@ -368,7 +368,7 @@ class SendMmsRequest implements ModelInterface, ArrayAccess
     /**
      * Sets mms_content
      *
-     * @param \Telstra_Messaging\Model\SendMmsRequestMMSContent[] $mms_content An Array of content that will be sent in an MMS message. If this array is present it will cause the “body” element to be ignored, and the message will be sent as an MMS.
+     * @param \Telstra_Messaging\Model\MMSContent[] $mms_content An Array of content that will be sent in an MMS message. If this array is present it will cause the “body” element to be ignored, and the message will be sent as an MMS.
      *
      * @return $this
      */
