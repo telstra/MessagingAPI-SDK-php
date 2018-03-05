@@ -23,7 +23,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
     }
   ],
   "require": {
-    "Telstra/MessagingAPI-SDK-php": "*@master"
+    "Telstra/MessagingAPI-SDK-php": "*"
   }
 }
 ```
