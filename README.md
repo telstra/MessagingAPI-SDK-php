@@ -2,8 +2,8 @@
 The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
-- API version: 2.2.4
-- Package version: 1.0.2
+- API version: 2.2.5
+- Package version: 1.0.3
 
 ## Requirements
 
