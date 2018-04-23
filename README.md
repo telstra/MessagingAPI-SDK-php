@@ -1,9 +1,8 @@
 # Messaging SDK
-The Telstra SMS Messaging API allows your applications to send and receive SMS text messages from Australia's leading network operator.  It also allows your application to track the delivery status of both sent and received SMS messages.
 
 
-- API version: 2.2.5
-- Package version: 1.0.3
+- API version: 2.2.6
+- Package version: 1.0.4
 
 ## Requirements
 
@@ -80,7 +79,7 @@ All URIs are relative to *https://tapi.telstra.com/v2*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AuthenticationApi* | [**authToken**](docs/Api/AuthenticationApi.md#authtoken) | **POST** /oauth/token | Generate authentication token
+*AuthenticationApi* | [**authToken**](docs/Api/AuthenticationApi.md#authtoken) | **POST** /oauth/token | Generate OAuth2 token
 *MessagingApi* | [**getMMSStatus**](docs/Api/MessagingApi.md#getmmsstatus) | **GET** /messages/mms/{messageid}/status | Get MMS Status
 *MessagingApi* | [**getSMSStatus**](docs/Api/MessagingApi.md#getsmsstatus) | **GET** /messages/sms/{messageId}/status | Get SMS Status
 *MessagingApi* | [**retrieveSMSResponses**](docs/Api/MessagingApi.md#retrievesmsresponses) | **GET** /messages/sms | Retrieve SMS Responses
@@ -94,15 +93,11 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [DeleteNumberRequest](docs/Model/DeleteNumberRequest.md)
- - [ErrorError](docs/Model/ErrorError.md)
- - [ErrorErrorError](docs/Model/ErrorErrorError.md)
  - [GetSubscriptionResponse](docs/Model/GetSubscriptionResponse.md)
  - [InboundPollResponse](docs/Model/InboundPollResponse.md)
  - [MMSContent](docs/Model/MMSContent.md)
  - [Message](docs/Model/Message.md)
  - [MessageSentResponse](docs/Model/MessageSentResponse.md)
- - [MessageType](docs/Model/MessageType.md)
- - [OAuthRequest](docs/Model/OAuthRequest.md)
  - [OAuthResponse](docs/Model/OAuthResponse.md)
  - [OutboundPollResponse](docs/Model/OutboundPollResponse.md)
  - [ProvisionNumberRequest](docs/Model/ProvisionNumberRequest.md)
@@ -122,10 +117,6 @@ Class | Method | HTTP request | Description
 - **Authorisation URL**: 
 - **Scopes**: 
  - **NSMS**: NSMS
-
-
-## Author
-
 
 
 
