@@ -10,7 +10,7 @@
         "telstradev"
     ],
     "homepage": "https://dev.telstra.com",
-    "license": "apache2",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "developersteve",
