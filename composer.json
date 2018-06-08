@@ -1,19 +1,20 @@
 {
-    "name": "Telstra/MessagingAPI-SDK-php",
+    "name": "telstra/messagingapi-sdk-php",
     "version": "1.0.4",
-    "description": "",
+    "description": "Telstra Messaging SDK - PHP Library",
     "keywords": [
         "swagger",
         "php",
         "sdk",
-        "api"
+        "api",
+        "telstradev"
     ],
-    "homepage": "http://swagger.io",
-    "license": "proprietary",
+    "homepage": "https://dev.telstra.com",
+    "license": "apache2",
     "authors": [
         {
-            "name": "Swagger and contributors",
-            "homepage": "https://github.com/swagger-api/swagger-codegen"
+            "name": "developersteve",
+            "homepage": "https://github.com/developersteve"
         }
     ],
     "require": {
