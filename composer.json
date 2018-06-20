@@ -7,15 +7,16 @@
         "openapi-generator",
         "php",
         "sdk",
+        "api",
         "rest",
-        "api"
+        "telstradev"
     ],
-    "homepage": "http://openapi-generator.tech",
-    "license": "proprietary",
+    "homepage": "https://dev.telstra.com",
+    "license": "Apache-2.0",
     "authors": [
         {
-            "name": "OpenAPI-Generator contributors",
-            "homepage": "https://openapi-generator.tech"
+            "name": "developersteve",
+            "homepage": "https://github.com/developersteve"
         }
     ],
     "require": {
