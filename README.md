@@ -2,7 +2,7 @@
 
 
 - API version: 2.2.6
-- Package version: 1.0.4
+- Package version: 1.0.4.1
 
 ## Requirements
 
@@ -22,7 +22,7 @@ To install the bindings via [Composer](http://getcomposer.org/), add the followi
     }
   ],
   "require": {
-    "Telstra/MessagingAPI-SDK-php": "*"
+    "Telstra/MessagingAPI-SDK-php": "*@master"
   }
 }
 ```
@@ -59,9 +59,9 @@ $apiInstance = new Telstra_Messaging\Api\AuthenticationApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$client_id = "client_id_example"; // string | 
-$client_secret = "client_secret_example"; // string | 
-$grant_type = "client_credentials"; // string | 
+$client_id = 'client_id_example'; // string | 
+$client_secret = 'client_secret_example'; // string | 
+$grant_type = 'client_credentials'; // string | 
 
 try {
     $result = $apiInstance->authToken($client_id, $client_secret, $grant_type);
@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**authToken**](docs/Api/AuthenticationApi.md#authtoken) | **POST** /oauth/token | Generate OAuth2 token
 *MessagingApi* | [**getMMSStatus**](docs/Api/MessagingApi.md#getmmsstatus) | **GET** /messages/mms/{messageid}/status | Get MMS Status
 *MessagingApi* | [**getSMSStatus**](docs/Api/MessagingApi.md#getsmsstatus) | **GET** /messages/sms/{messageId}/status | Get SMS Status
+*MessagingApi* | [**retrieveMMSResponses**](docs/Api/MessagingApi.md#retrievemmsresponses) | **GET** /messages/mms | Retrieve MMS Responses
 *MessagingApi* | [**retrieveSMSResponses**](docs/Api/MessagingApi.md#retrievesmsresponses) | **GET** /messages/sms | Retrieve SMS Responses
 *MessagingApi* | [**sendMMS**](docs/Api/MessagingApi.md#sendmms) | **POST** /messages/mms | Send MMS
 *MessagingApi* | [**sendSMS**](docs/Api/MessagingApi.md#sendsms) | **POST** /messages/sms | Send SMS
@@ -117,6 +118,10 @@ Class | Method | HTTP request | Description
 - **Authorisation URL**: 
 - **Scopes**: 
  - **NSMS**: NSMS
+
+
+## Author
+
 
 
 

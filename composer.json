@@ -1,12 +1,14 @@
 {
-    "name": "telstra/messagingapi-sdk-php",
-    "version": "1.0.4",
-    "description": "Telstra Messaging SDK - PHP Library",
+    "name": "Telstra/MessagingAPI-SDK-php",
+    "version": "1.0.4.1",
+    "description": "",
     "keywords": [
-        "swagger",
+        "openapitools",
+        "openapi-generator",
         "php",
         "sdk",
         "api",
+        "rest",
         "telstradev"
     ],
     "homepage": "https://dev.telstra.com",

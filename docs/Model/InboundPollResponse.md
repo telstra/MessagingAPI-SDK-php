@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **string** | message status | [optional] 
-**destination_address** | **string** | The phone number (recipient) that the message was sent to(in E.164 format). | [optional] 
+**destination_address** | **string** | The phone number (recipient) that the message was sent to (in E.164 format). | [optional] 
 **sender_address** | **string** | The phone number (sender) that the message was sent from (in E.164 format). | [optional] 
 **message** | **string** | Text of the message that was sent | [optional] 
 **message_id** | **string** | Message Id | [optional] 
