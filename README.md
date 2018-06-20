@@ -2,7 +2,7 @@
 
 
 - API version: 2.2.6
-- Package version: 1.0.4
+- Package version: 1.0.4.1
 
 ## Requirements
 
@@ -59,9 +59,9 @@ $apiInstance = new Telstra_Messaging\Api\AuthenticationApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$client_id = "client_id_example"; // string | 
-$client_secret = "client_secret_example"; // string | 
-$grant_type = "client_credentials"; // string | 
+$client_id = 'client_id_example'; // string | 
+$client_secret = 'client_secret_example'; // string | 
+$grant_type = 'client_credentials'; // string | 
 
 try {
     $result = $apiInstance->authToken($client_id, $client_secret, $grant_type);

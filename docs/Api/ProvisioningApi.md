@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **createSubscription**
-> \Telstra_Messaging\Model\ProvisionNumberResponse createSubscription($body)
+> \Telstra_Messaging\Model\ProvisionNumberResponse createSubscription($provision_number_request)
 
 Create Subscription
 
@@ -30,10 +30,10 @@ $apiInstance = new Telstra_Messaging\Api\ProvisioningApi(
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Telstra_Messaging\Model\ProvisionNumberRequest(); // \Telstra_Messaging\Model\ProvisionNumberRequest | A JSON payload containing the required attributes
+$provision_number_request = new \Telstra_Messaging\Model\ProvisionNumberRequest(); // \Telstra_Messaging\Model\ProvisionNumberRequest | A JSON payload containing the required attributes
 
 try {
-    $result = $apiInstance->createSubscription($body);
+    $result = $apiInstance->createSubscription($provision_number_request);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProvisioningApi->createSubscription: ', $e->getMessage(), PHP_EOL;
@@ -45,7 +45,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Telstra_Messaging\Model\ProvisionNumberRequest**](../Model/ProvisionNumberRequest.md)| A JSON payload containing the required attributes |
+ **provision_number_request** | [**\Telstra_Messaging\Model\ProvisionNumberRequest**](../Model/ProvisionNumberRequest.md)| A JSON payload containing the required attributes |
 
 ### Return type
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **deleteSubscription**
-> deleteSubscription($body)
+> deleteSubscription($delete_number_request)
 
 Delete Subscription
 
@@ -83,10 +83,10 @@ $apiInstance = new Telstra_Messaging\Api\ProvisioningApi(
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Telstra_Messaging\Model\DeleteNumberRequest(); // \Telstra_Messaging\Model\DeleteNumberRequest | EmptyArr
+$delete_number_request = new \Telstra_Messaging\Model\DeleteNumberRequest(); // \Telstra_Messaging\Model\DeleteNumberRequest | EmptyArr
 
 try {
-    $apiInstance->deleteSubscription($body);
+    $apiInstance->deleteSubscription($delete_number_request);
 } catch (Exception $e) {
     echo 'Exception when calling ProvisioningApi->deleteSubscription: ', $e->getMessage(), PHP_EOL;
 }
@@ -97,7 +97,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Telstra_Messaging\Model\DeleteNumberRequest**](../Model/DeleteNumberRequest.md)| EmptyArr |
+ **delete_number_request** | [**\Telstra_Messaging\Model\DeleteNumberRequest**](../Model/DeleteNumberRequest.md)| EmptyArr |
 
 ### Return type
 
@@ -110,7 +110,7 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -158,7 +158,7 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

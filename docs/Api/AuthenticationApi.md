@@ -24,9 +24,9 @@ $apiInstance = new Telstra_Messaging\Api\AuthenticationApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$client_id = "client_id_example"; // string | 
-$client_secret = "client_secret_example"; // string | 
-$grant_type = "client_credentials"; // string | 
+$client_id = 'client_id_example'; // string | 
+$client_secret = 'client_secret_example'; // string | 
+$grant_type = 'client_credentials'; // string | 
 
 try {
     $result = $apiInstance->authToken($client_id, $client_secret, $grant_type);
@@ -43,7 +43,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **client_id** | **string**|  |
  **client_secret** | **string**|  |
- **grant_type** | **string**|  | [default to client_credentials]
+ **grant_type** | **string**|  | [default to &#39;client_credentials&#39;]
 
 ### Return type
 

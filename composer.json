@@ -1,19 +1,21 @@
 {
     "name": "Telstra/MessagingAPI-SDK-php",
-    "version": "1.0.4",
+    "version": "1.0.4.1",
     "description": "",
     "keywords": [
-        "swagger",
+        "openapitools",
+        "openapi-generator",
         "php",
         "sdk",
+        "rest",
         "api"
     ],
-    "homepage": "http://swagger.io",
+    "homepage": "http://openapi-generator.tech",
     "license": "proprietary",
     "authors": [
         {
-            "name": "Swagger and contributors",
-            "homepage": "https://github.com/swagger-api/swagger-codegen"
+            "name": "OpenAPI-Generator contributors",
+            "homepage": "https://openapi-generator.tech"
         }
     ],
     "require": {
