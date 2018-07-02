@@ -1,8 +1,8 @@
 # Messaging SDK
 
 
-- API version: 2.2.6
-- Package version: 1.0.4.1
+- API version: 2.2.7
+- Package version: 1.0.5
 
 ## Requirements
 
