@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **messages** | [**\Telstra_Messaging\Model\Message[]**](Message.md) | An array of messages. | 
-**country** | **string** | An array of the countries to which the destination MSISDNs belong. | [optional] 
+**country** | **object[]** | An array of the countries to which the destination MSISDNs belong. | [optional] 
 **message_type** | **string** | This returns whether the message sent was a SMS or MMS. | 
 **number_segments** | **int** | For SMS messages only, the value indicates the number of 160 character message segments sent. | 
 
