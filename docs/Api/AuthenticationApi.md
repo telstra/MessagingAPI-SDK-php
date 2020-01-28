@@ -7,17 +7,21 @@ Method | HTTP request | Description
 [**authToken**](AuthenticationApi.md#authToken) | **POST** /oauth/token | Generate OAuth2 token
 
 
-# **authToken**
-> \Telstra_Messaging\Model\OAuthResponse authToken($client_id, $client_secret, $grant_type)
+
+## authToken
+
+> \Telstra_Messaging\Model\OAuthResponse authToken($client_id, $client_secret, $grant_type, $scope)
 
 Generate OAuth2 token
 
-To generate an OAuth2 Authentication token, pass through your `Client key` and `Client secret` that you received when you registered for the **API Free Trial** Product. The grant_type should be left as `client_credentials` and the scope as `NSMS`. The token will expire in one hour.
+To generate an OAuth2 Authentication token, pass through your `Client key` and `Client secret` that you received when you registered for the **API Free Trial** Product.  The grant_type should be left as `client_credentials` and the scope as `NSMS`.  The token will expire in one hour.
 
 ### Example
+
 ```php
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
+
 
 $apiInstance = new Telstra_Messaging\Api\AuthenticationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -27,9 +31,10 @@ $apiInstance = new Telstra_Messaging\Api\AuthenticationApi(
 $client_id = 'client_id_example'; // string | 
 $client_secret = 'client_secret_example'; // string | 
 $grant_type = 'client_credentials'; // string | 
+$scope = 'scope_example'; // string | NSMS
 
 try {
-    $result = $apiInstance->authToken($client_id, $client_secret, $grant_type);
+    $result = $apiInstance->authToken($client_id, $client_secret, $grant_type, $scope);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling AuthenticationApi->authToken: ', $e->getMessage(), PHP_EOL;
@@ -39,11 +44,13 @@ try {
 
 ### Parameters
 
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **client_id** | **string**|  |
  **client_secret** | **string**|  |
  **grant_type** | **string**|  | [default to &#39;client_credentials&#39;]
+ **scope** | **string**| NSMS | [optional]
 
 ### Return type
 
@@ -55,8 +62,10 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-www-form-urlencoded
- - **Accept**: application/json
+- **Content-Type**: application/x-www-form-urlencoded
+- **Accept**: application/json
 
-[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../../README.md#documentation-for-models)
+[[Back to README]](../../README.md)
 

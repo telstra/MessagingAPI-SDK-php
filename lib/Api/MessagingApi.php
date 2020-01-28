@@ -12,12 +12,12 @@
 /**
  * Telstra Messaging API
  *
- * # Introduction  <table><tbody><tr><td class = 'into_api' style='border:none;padding:0 0 0 0'><p>Send and receive SMS and MMS messages globally using Telstra's enterprise grade Messaging API. It also allows your application to track the delivery status of both sent and received messages. Get your dedicated Australian number, and start sending and receiving messages today.</p></td><td class = 'into_api_logo' style='width: 20%;border:none'><img class = 'api_logo' style='margin: -26px 0 0 0' src = 'https://test-telstra-retail-tdev.devportal.apigee.io/sites/default/files/messagingapi-icon.png'></td></tr></tbody></table>  # Features  The Telstra Messaging API provides the features below. | Feature | Description | | --- | --- | | `Dedicated Number` | Provision a mobile number for your account to be used as `from` address in the API | | `Send Messages` | Sending SMS or MMS messages | | `Receive Messages` | Telstra will deliver messages sent to a dedicated number or to the `notifyURL` defined by you | | `Broadcast Messages` | Invoke a single API call to send a message to a list of numbers provided in `to` | | `Delivery Status` | Query the delivery status of your messages | | `Callbacks` | Provide a notification URL and Telstra will notify your app when a message status changes | | `Alphanumeric Identifier` | Differentiate yourself by providing an alphanumeric string in `from`. This feature is only available on paid plans | | `Concatenation` | Send messages up to 1900 characters long and Telstra will automaticaly segment and reassemble them | | `Reply Request` | Create a chat session by associating `messageId` and `to` number to track responses received from a mobile number. We will store this association for 8 days | | `Character set` | Accepts all Unicode characters as part of UTF-8 | | `Bounce-back response` | See if your SMS hits an unreachable or unallocated number (Australia Only) | | `Queuing` | Messaging API will automatically queue and deliver each message at a compliant rate. | | `Emoji Encoding` | The API supports the encoding of the full range of emojis. Emojis in the reply messages will be in their UTF-8 format. |  ## Delivery Notification or Callbacks  The API provides several methods for notifying when a message has been delivered to the destination.  1. When you send a message there is an opportunity to specify a `notifyURL`. Once the message has been delivered the API will make a call to this URL to advise of the message status. 2. If you do not specify a URL you can always call the `GET /status` API to get the status of the message.  # Getting Access to the API  1. Register at [https://dev.telstra.com](https://dev.telstra.com). 2. After registration, login to [https://dev.telstra.com](https://dev.telstra.com) and navigate to the **My apps** page. 3. Create your application by clicking the **Add new app** button 4. Select **API Free Trial** Product when configuring your application. This Product includes the Telstra Messaging API as well as other free trial APIs. Your application will be approved automatically. 5. There is a maximum of 1000 free messages per developer. Additional messages and features can be purchased from [https://dev.telstra.com](https://dev.telstra.com). 6. Note your `Client key` and `Client secret` as these will be needed to provision a number for your application and for authentication.  Now head over to **Getting Started** where you can find a postman collection as well as some links to sample apps and SDKs to get you started.  Happy Messaging!  # Frequently Asked Questions  **Q: Is creating a subscription via the Provisioning call a required step?**  A. Yes. You will only be able to start sending messages if you have a provisioned dedicated number. Use Provisioning to create a dedicated number subscription, or renew your dedicated number if it has expired.  **Q: When trying to send an SMS I receive a `400 Bad Request` response. How can I fix this?**  A. You need to make sure you have a provisioned dedicated number before you can send an SMS.  If you do not have a provisioned dedicated number and you try to send a message via the API, you will get the error below in the response:  <pre><code class=\"language-sh\">{   \"status\":\"400\",   \"code\":\"DELIVERY-IMPOSSIBLE\",   \"message\":\"Invalid \\'from\\' address specified\" }</code></pre>  Use Provisioning to create a dedicated number subscription, or renew your dedicated number if it has expired.  **Q: How long does my dedicated number stay active for?**  A. When you provision a dedicated number, by default it will be active for 30 days.  You can use the `activeDays` parameter during the provisioning call to increment or decrement the number of days your dedicated number will remain active.  Note that Free Trial apps will have 30 days as the maximum `activeDays` they can add to their provisioned number. If the Provisioning call is made several times within that 30-Day period, it will return the `expiryDate` in the Unix format and will not add any activeDays until after that `expiryDate`.  **Q: Can I send a broadcast message using the Telstra Messaging API?**  A. Yes. Recipient numbers can be in the form of an array of strings if a broadcast message needs to be sent, allowing you to send to multiple mobile numbers in one API call.   A sample request body for this will be: `{\"to\":[\"+61412345678\",\"+61487654321\"],\"body\":\"Test Message\"}`    **Q: Can I send SMS and MMS to all countries?**  A. You can send SMS and MMS to all countries EXCEPT to countries which are subject to global sanctions namely: Burma, Côte d'Ivoire, Cuba, Iran, North Korea, Syria.  **Q: Can I use `Alphanumeric Identifier` from my paid plan via credit card?**  A. `Alphanumeric Identifier` is only available on Telstra Account paid plans, not through credit card paid plans.  **Q: What is the maximum sized MMS that I can send?**  A. This will depend on the carrier that will receive the MMS. For Telstra it's up to 2MB,  Optus up to 1.5MB and Vodafone only allows up to 500kB. You will need to check with international carriers for thier MMS size limits.  **Q: How is the size of an MMS calculated?**  A. Images are scaled up to approximately 4/3 when base64 encoded. Additionally, there is approximately 200 bytes of overhead on each MMS. Assuming the maximum MMS that can be sent on Telstra’s network is 2MB, then the maximum image size that can be sent will be approximately 1.378MB (1.378 x 1.34 + 200, without SOAP encapsulation).  **Q: How is an MMS classified as Small or Large?**  A. MMSes with size below 600kB are classed as Small whereas those that are bigger than 600kB are classed as Large. They will be charged accordingly.  **Q: Are SMILs supported by the Messaging API?**  A. While there will be no error if you send an MMS with a SMIL presentation, the actual layout or sequence defined in the SMIL may not display as expected because most of the new smartphone devices ignore the SMIL presentation layer. SMIL was used in feature phones which had limited capability and SMIL allowed a *powerpoint type* presentation to be provided. Smartphones now have the capability to display video which is the better option for presentations. It is recommended that MMS messages should just drop the SMIL.  **Q: How do I assign a delivery notification or callback URL?**  A. You can assign a delivery notification or callback URL by adding the `notifyURL` parameter in the body of the request when you send a message. Once the message has been delivered, a notification will then be posted to this callback URL.  **Q: What is the difference between the `notifyURL` parameter in the Provisoning call versus the `notifyURL` parameter in the Send Message call?**  A. The `notifyURL` in the Provisoning call will be the URL where replies to the provisioned number will be posted. On the other hand, the `notifyURL` in the Send Message call will be the URL where the delivery notification will be posted, e.g. when an SMS has already been delivered to the recipient.  # Getting Started  Below are the steps to get started with the Telstra Messaging API.   1. Generate an OAuth2 token using your `Client key` and `Client secret`.   2. Use the Provisioning call to create a subscription and receive a dedicated number.   3. Send a message to a specific mobile number.  ## Run in Postman <a href=\"https://app.getpostman.com/run-collection/ded00578f69a9deba256#?env%5BMessaging%20API%20Environments%5D=W3siZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X2lkIiwidmFsdWUiOiIiLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiY2xpZW50X3NlY3JldCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6ImFjY2Vzc190b2tlbiIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Imhvc3QiLCJ2YWx1ZSI6InRhcGkudGVsc3RyYS5jb20iLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoiQXV0aG9yaXphdGlvbiIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifSx7ImVuYWJsZWQiOnRydWUsImtleSI6Im9hdXRoX2hvc3QiLCJ2YWx1ZSI6InNhcGkudGVsc3RyYS5jb20iLCJ0eXBlIjoidGV4dCJ9LHsiZW5hYmxlZCI6dHJ1ZSwia2V5IjoibWVzc2FnZV9pZCIsInZhbHVlIjoiIiwidHlwZSI6InRleHQifV0=\"><img src=\"https://run.pstmn.io/button.svg\" alt=\"Run in Postman\"/></a>  ## Sample Apps   - [Perl Sample App](https://github.com/telstra/MessagingAPI-perl-sample-app)   - [Happy Chat App](https://github.com/telstra/messaging-sample-code-happy-chat)   - [PHP Sample App](https://github.com/developersteve/telstra-messaging-php)  ## SDK Repos   - [Messaging API - PHP SDK](https://github.com/telstra/MessagingAPI-SDK-php)   - [Messaging API - Python SDK](https://github.com/telstra/MessagingAPI-SDK-python)   - [Messaging API - Ruby SDK](https://github.com/telstra/MessagingAPI-SDK-ruby)   - [Messaging API - NodeJS SDK](https://github.com/telstra/MessagingAPI-SDK-node)   - [Messaging API - .Net2 SDK](https://github.com/telstra/MessagingAPI-SDK-dotnet)   - [Messaging API - Java SDK](https://github.com/telstra/MessagingAPI-SDK-Java)  ## Blog Posts For more information on the Messaging API, you can read these blog posts: - [Callbacks Part 1](https://dev.telstra.com/content/understanding-messaging-api-callbacks-part-1)  - [Callbacks Part 2](https://dev.telstra.com/content/understanding-messaging-api-callbacks-part-2)
+ * The API specification for Telstra Messaging API
  *
- * OpenAPI spec version: 2.2.9
+ * The version of the OpenAPI document: 2.2.9
  * 
  * Generated by: https://openapi-generator.tech
- * OpenAPI Generator version: 3.2.0
+ * OpenAPI Generator version: 4.2.3-SNAPSHOT
  */
 
 /**
@@ -65,18 +65,46 @@ class MessagingApi
     protected $headerSelector;
 
     /**
+     * @var int Host index
+     */
+    protected $hostIndex;
+
+    /**
      * @param ClientInterface $client
      * @param Configuration   $config
      * @param HeaderSelector  $selector
+     * @param int             $host_index (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
         ClientInterface $client = null,
         Configuration $config = null,
-        HeaderSelector $selector = null
+        HeaderSelector $selector = null,
+        $host_index = 0
     ) {
         $this->client = $client ?: new Client();
         $this->config = $config ?: new Configuration();
         $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->hostIndex = $host_index;
+    }
+
+    /**
+     * Set the host index
+     *
+     * @param  int Host index (required)
+     */
+    public function setHostIndex($host_index)
+    {
+        $this->hostIndex = $host_index;
+    }
+
+    /**
+     * Get the host index
+     *
+     * @return Host index
+     */
+    public function getHostIndex()
+    {
+        return $this->hostIndex;
     }
 
     /**
@@ -92,7 +120,7 @@ class MessagingApi
      *
      * Get MMS Status
      *
-     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms (required)
+     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/mms (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -109,7 +137,7 @@ class MessagingApi
      *
      * Get MMS Status
      *
-     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms (required)
+     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/mms (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -128,7 +156,7 @@ class MessagingApi
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -153,10 +181,7 @@ class MessagingApi
                     if ('\Telstra_Messaging\Model\OutboundPollResponse[]' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\OutboundPollResponse[]' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -171,10 +196,7 @@ class MessagingApi
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -203,7 +225,7 @@ class MessagingApi
      *
      * Get MMS Status
      *
-     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms (required)
+     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/mms (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -223,7 +245,7 @@ class MessagingApi
      *
      * Get MMS Status
      *
-     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms (required)
+     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/mms (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -241,10 +263,7 @@ class MessagingApi
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -273,7 +292,7 @@ class MessagingApi
     /**
      * Create request for operation 'getMMSStatus'
      *
-     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/mms (required)
+     * @param  string $messageid Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/mms (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -321,10 +340,10 @@ class MessagingApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -377,7 +396,7 @@ class MessagingApi
      *
      * Get SMS Status
      *
-     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms. (required)
+     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/sms. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -394,7 +413,7 @@ class MessagingApi
      *
      * Get SMS Status
      *
-     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms. (required)
+     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/sms. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -413,7 +432,7 @@ class MessagingApi
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -438,10 +457,7 @@ class MessagingApi
                     if ('\Telstra_Messaging\Model\OutboundPollResponse[]' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\OutboundPollResponse[]' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -456,10 +472,7 @@ class MessagingApi
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -488,7 +501,7 @@ class MessagingApi
      *
      * Get SMS Status
      *
-     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms. (required)
+     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/sms. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -508,7 +521,7 @@ class MessagingApi
      *
      * Get SMS Status
      *
-     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms. (required)
+     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/sms. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -526,10 +539,7 @@ class MessagingApi
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -558,7 +568,7 @@ class MessagingApi
     /**
      * Create request for operation 'getSMSStatus'
      *
-     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://api.telstra.com/v2/messages/sms. (required)
+     * @param  string $message_id Unique identifier of a message - it is the value returned from a previous POST call to https://tapi.telstra.com/v2/messages/sms. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -606,10 +616,10 @@ class MessagingApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -658,34 +668,34 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveMMSResponses
+     * Operation mMSHealthCheck
      *
-     * Retrieve MMS Responses
+     * MMS Health Check
      *
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\MMSContent[]
+     * @return \Telstra_Messaging\Model\HealthCheckResponse
      */
-    public function retrieveMMSResponses()
+    public function mMSHealthCheck()
     {
-        list($response) = $this->retrieveMMSResponsesWithHttpInfo();
+        list($response) = $this->mMSHealthCheckWithHttpInfo();
         return $response;
     }
 
     /**
-     * Operation retrieveMMSResponsesWithHttpInfo
+     * Operation mMSHealthCheckWithHttpInfo
      *
-     * Retrieve MMS Responses
+     * MMS Health Check
      *
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\MMSContent[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\HealthCheckResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function retrieveMMSResponsesWithHttpInfo()
+    public function mMSHealthCheckWithHttpInfo()
     {
-        $request = $this->retrieveMMSResponsesRequest();
+        $request = $this->mMSHealthCheckRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -696,7 +706,7 @@ class MessagingApi
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -718,31 +728,25 @@ class MessagingApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 200:
-                    if ('\Telstra_Messaging\Model\MMSContent[]' === '\SplFileObject') {
+                    if ('\Telstra_Messaging\Model\HealthCheckResponse' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\MMSContent[]' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MMSContent[]', []),
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\HealthCheckResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Telstra_Messaging\Model\MMSContent[]';
+            $returnType = '\Telstra_Messaging\Model\HealthCheckResponse';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -756,7 +760,7 @@ class MessagingApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\MMSContent[]',
+                        '\Telstra_Messaging\Model\HealthCheckResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -767,17 +771,17 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveMMSResponsesAsync
+     * Operation mMSHealthCheckAsync
      *
-     * Retrieve MMS Responses
+     * MMS Health Check
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrieveMMSResponsesAsync()
+    public function mMSHealthCheckAsync()
     {
-        return $this->retrieveMMSResponsesAsyncWithHttpInfo()
+        return $this->mMSHealthCheckAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -786,18 +790,18 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveMMSResponsesAsyncWithHttpInfo
+     * Operation mMSHealthCheckAsyncWithHttpInfo
      *
-     * Retrieve MMS Responses
+     * MMS Health Check
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrieveMMSResponsesAsyncWithHttpInfo()
+    public function mMSHealthCheckAsyncWithHttpInfo()
     {
-        $returnType = '\Telstra_Messaging\Model\MMSContent[]';
-        $request = $this->retrieveMMSResponsesRequest();
+        $returnType = '\Telstra_Messaging\Model\HealthCheckResponse';
+        $request = $this->mMSHealthCheckRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -807,10 +811,7 @@ class MessagingApi
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -837,13 +838,266 @@ class MessagingApi
     }
 
     /**
-     * Create request for operation 'retrieveMMSResponses'
+     * Create request for operation 'mMSHealthCheck'
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function retrieveMMSResponsesRequest()
+    protected function mMSHealthCheckRequest()
+    {
+
+        $resourcePath = '/messages/mms/heathcheck';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation retrieveMMSReplies
+     *
+     * Retrieve MMS Replies
+     *
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Telstra_Messaging\Model\GetMmsResponse
+     */
+    public function retrieveMMSReplies()
+    {
+        list($response) = $this->retrieveMMSRepliesWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation retrieveMMSRepliesWithHttpInfo
+     *
+     * Retrieve MMS Replies
+     *
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Telstra_Messaging\Model\GetMmsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function retrieveMMSRepliesWithHttpInfo()
+    {
+        $request = $this->retrieveMMSRepliesRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\Telstra_Messaging\Model\GetMmsResponse' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\GetMmsResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Telstra_Messaging\Model\GetMmsResponse';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Telstra_Messaging\Model\GetMmsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation retrieveMMSRepliesAsync
+     *
+     * Retrieve MMS Replies
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function retrieveMMSRepliesAsync()
+    {
+        return $this->retrieveMMSRepliesAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation retrieveMMSRepliesAsyncWithHttpInfo
+     *
+     * Retrieve MMS Replies
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function retrieveMMSRepliesAsyncWithHttpInfo()
+    {
+        $returnType = '\Telstra_Messaging\Model\GetMmsResponse';
+        $request = $this->retrieveMMSRepliesRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'retrieveMMSReplies'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function retrieveMMSRepliesRequest()
     {
 
         $resourcePath = '/messages/mms';
@@ -872,10 +1126,10 @@ class MessagingApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -924,34 +1178,34 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveSMSResponses
+     * Operation retrieveSMSReplies
      *
-     * Retrieve SMS Responses
+     * Retrieve SMS Replies
      *
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Telstra_Messaging\Model\InboundPollResponse
      */
-    public function retrieveSMSResponses()
+    public function retrieveSMSReplies()
     {
-        list($response) = $this->retrieveSMSResponsesWithHttpInfo();
+        list($response) = $this->retrieveSMSRepliesWithHttpInfo();
         return $response;
     }
 
     /**
-     * Operation retrieveSMSResponsesWithHttpInfo
+     * Operation retrieveSMSRepliesWithHttpInfo
      *
-     * Retrieve SMS Responses
+     * Retrieve SMS Replies
      *
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Telstra_Messaging\Model\InboundPollResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function retrieveSMSResponsesWithHttpInfo()
+    public function retrieveSMSRepliesWithHttpInfo()
     {
-        $request = $this->retrieveSMSResponsesRequest();
+        $request = $this->retrieveSMSRepliesRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -962,7 +1216,7 @@ class MessagingApi
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -987,10 +1241,7 @@ class MessagingApi
                     if ('\Telstra_Messaging\Model\InboundPollResponse' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\InboundPollResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -1005,10 +1256,7 @@ class MessagingApi
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -1033,17 +1281,17 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveSMSResponsesAsync
+     * Operation retrieveSMSRepliesAsync
      *
-     * Retrieve SMS Responses
+     * Retrieve SMS Replies
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrieveSMSResponsesAsync()
+    public function retrieveSMSRepliesAsync()
     {
-        return $this->retrieveSMSResponsesAsyncWithHttpInfo()
+        return $this->retrieveSMSRepliesAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1052,18 +1300,18 @@ class MessagingApi
     }
 
     /**
-     * Operation retrieveSMSResponsesAsyncWithHttpInfo
+     * Operation retrieveSMSRepliesAsyncWithHttpInfo
      *
-     * Retrieve SMS Responses
+     * Retrieve SMS Replies
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function retrieveSMSResponsesAsyncWithHttpInfo()
+    public function retrieveSMSRepliesAsyncWithHttpInfo()
     {
         $returnType = '\Telstra_Messaging\Model\InboundPollResponse';
-        $request = $this->retrieveSMSResponsesRequest();
+        $request = $this->retrieveSMSRepliesRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1073,10 +1321,7 @@ class MessagingApi
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -1103,13 +1348,13 @@ class MessagingApi
     }
 
     /**
-     * Create request for operation 'retrieveSMSResponses'
+     * Create request for operation 'retrieveSMSReplies'
      *
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function retrieveSMSResponsesRequest()
+    protected function retrieveSMSRepliesRequest()
     {
 
         $resourcePath = '/messages/sms';
@@ -1138,10 +1383,10 @@ class MessagingApi
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1190,40 +1435,34 @@ class MessagingApi
     }
 
     /**
-     * Operation sendMMS
+     * Operation sMSHealthCheck
      *
-     * Send MMS
+     * SMS Health Check
      *
-     * @param  \Telstra_Messaging\Model\SendMmsRequest $send_mms_request A JSON or XML payload containing the recipient&#39;s phone number and MMS message.
-The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit.
- (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\MessageSentResponse|object
+     * @return \Telstra_Messaging\Model\HealthCheckResponse
      */
-    public function sendMMS($send_mms_request)
+    public function sMSHealthCheck()
     {
-        list($response) = $this->sendMMSWithHttpInfo($send_mms_request);
+        list($response) = $this->sMSHealthCheckWithHttpInfo();
         return $response;
     }
 
     /**
-     * Operation sendMMSWithHttpInfo
+     * Operation sMSHealthCheckWithHttpInfo
      *
-     * Send MMS
+     * SMS Health Check
      *
-     * @param  \Telstra_Messaging\Model\SendMmsRequest $send_mms_request A JSON or XML payload containing the recipient&#39;s phone number and MMS message.
-The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit.
- (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\MessageSentResponse|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\HealthCheckResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function sendMMSWithHttpInfo($send_mms_request)
+    public function sMSHealthCheckWithHttpInfo()
     {
-        $request = $this->sendMMSRequest($send_mms_request);
+        $request = $this->sMSHealthCheckRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -1234,7 +1473,529 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\Telstra_Messaging\Model\HealthCheckResponse' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\HealthCheckResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Telstra_Messaging\Model\HealthCheckResponse';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Telstra_Messaging\Model\HealthCheckResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation sMSHealthCheckAsync
+     *
+     * SMS Health Check
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sMSHealthCheckAsync()
+    {
+        return $this->sMSHealthCheckAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation sMSHealthCheckAsyncWithHttpInfo
+     *
+     * SMS Health Check
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sMSHealthCheckAsyncWithHttpInfo()
+    {
+        $returnType = '\Telstra_Messaging\Model\HealthCheckResponse';
+        $request = $this->sMSHealthCheckRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'sMSHealthCheck'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function sMSHealthCheckRequest()
+    {
+
+        $resourcePath = '/messages/sms/heathcheck';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation sMSMulti
+     *
+     * Send Multiple SMS
+     *
+     * @param  \Telstra_Messaging\Model\SendSmsMultiRequest $payload A JSON payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Telstra_Messaging\Model\MessageSentResponseSms
+     */
+    public function sMSMulti($payload)
+    {
+        list($response) = $this->sMSMultiWithHttpInfo($payload);
+        return $response;
+    }
+
+    /**
+     * Operation sMSMultiWithHttpInfo
+     *
+     * Send Multiple SMS
+     *
+     * @param  \Telstra_Messaging\Model\SendSmsMultiRequest $payload A JSON payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Telstra_Messaging\Model\MessageSentResponseSms, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function sMSMultiWithHttpInfo($payload)
+    {
+        $request = $this->sMSMultiRequest($payload);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\Telstra_Messaging\Model\MessageSentResponseSms' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MessageSentResponseSms', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Telstra_Messaging\Model\MessageSentResponseSms';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Telstra_Messaging\Model\MessageSentResponseSms',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation sMSMultiAsync
+     *
+     * Send Multiple SMS
+     *
+     * @param  \Telstra_Messaging\Model\SendSmsMultiRequest $payload A JSON payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sMSMultiAsync($payload)
+    {
+        return $this->sMSMultiAsyncWithHttpInfo($payload)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation sMSMultiAsyncWithHttpInfo
+     *
+     * Send Multiple SMS
+     *
+     * @param  \Telstra_Messaging\Model\SendSmsMultiRequest $payload A JSON payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function sMSMultiAsyncWithHttpInfo($payload)
+    {
+        $returnType = '\Telstra_Messaging\Model\MessageSentResponseSms';
+        $request = $this->sMSMultiRequest($payload);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'sMSMulti'
+     *
+     * @param  \Telstra_Messaging\Model\SendSmsMultiRequest $payload A JSON payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function sMSMultiRequest($payload)
+    {
+        // verify the required parameter 'payload' is set
+        if ($payload === null || (is_array($payload) && count($payload) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $payload when calling sMSMulti'
+            );
+        }
+
+        $resourcePath = '/messages/sms/multi';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($payload)) {
+            $_tempBody = $payload;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation sendMMS
+     *
+     * Send MMS
+     *
+     * @param  \Telstra_Messaging\Model\SendMmsRequest $body A JSON or XML payload containing the recipient&#39;s phone number and MMS message. The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit. (required)
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Telstra_Messaging\Model\MessageSentResponseMms|object
+     */
+    public function sendMMS($body)
+    {
+        list($response) = $this->sendMMSWithHttpInfo($body);
+        return $response;
+    }
+
+    /**
+     * Operation sendMMSWithHttpInfo
+     *
+     * Send MMS
+     *
+     * @param  \Telstra_Messaging\Model\SendMmsRequest $body A JSON or XML payload containing the recipient&#39;s phone number and MMS message. The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit. (required)
+     *
+     * @throws \Telstra_Messaging\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Telstra_Messaging\Model\MessageSentResponseMms|object, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function sendMMSWithHttpInfo($body)
+    {
+        $request = $this->sendMMSRequest($body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -1256,17 +2017,14 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 201:
-                    if ('\Telstra_Messaging\Model\MessageSentResponse' === '\SplFileObject') {
+                    if ('\Telstra_Messaging\Model\MessageSentResponseMms' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\MessageSentResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MessageSentResponse', []),
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MessageSentResponseMms', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -1274,10 +2032,7 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
                     if ('object' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('object' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -1287,15 +2042,12 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
                     ];
             }
 
-            $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
+            $returnType = '\Telstra_Messaging\Model\MessageSentResponseMms';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -1309,7 +2061,7 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\MessageSentResponse',
+                        '\Telstra_Messaging\Model\MessageSentResponseMms',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1332,16 +2084,14 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
      *
      * Send MMS
      *
-     * @param  \Telstra_Messaging\Model\SendMmsRequest $send_mms_request A JSON or XML payload containing the recipient&#39;s phone number and MMS message.
-The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendMmsRequest $body A JSON or XML payload containing the recipient&#39;s phone number and MMS message. The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendMMSAsync($send_mms_request)
+    public function sendMMSAsync($body)
     {
-        return $this->sendMMSAsyncWithHttpInfo($send_mms_request)
+        return $this->sendMMSAsyncWithHttpInfo($body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1354,17 +2104,15 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
      *
      * Send MMS
      *
-     * @param  \Telstra_Messaging\Model\SendMmsRequest $send_mms_request A JSON or XML payload containing the recipient&#39;s phone number and MMS message.
-The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendMmsRequest $body A JSON or XML payload containing the recipient&#39;s phone number and MMS message. The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendMMSAsyncWithHttpInfo($send_mms_request)
+    public function sendMMSAsyncWithHttpInfo($body)
     {
-        $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
-        $request = $this->sendMMSRequest($send_mms_request);
+        $returnType = '\Telstra_Messaging\Model\MessageSentResponseMms';
+        $request = $this->sendMMSRequest($body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1374,10 +2122,7 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -1406,19 +2151,17 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
     /**
      * Create request for operation 'sendMMS'
      *
-     * @param  \Telstra_Messaging\Model\SendMmsRequest $send_mms_request A JSON or XML payload containing the recipient&#39;s phone number and MMS message.
-The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendMmsRequest $body A JSON or XML payload containing the recipient&#39;s phone number and MMS message. The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function sendMMSRequest($send_mms_request)
+    protected function sendMMSRequest($body)
     {
-        // verify the required parameter 'send_mms_request' is set
-        if ($send_mms_request === null || (is_array($send_mms_request) && count($send_mms_request) === 0)) {
+        // verify the required parameter 'body' is set
+        if ($body === null || (is_array($body) && count($body) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $send_mms_request when calling sendMMS'
+                'Missing the required parameter $body when calling sendMMS'
             );
         }
 
@@ -1433,8 +2176,8 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
 
         // body params
         $_tempBody = null;
-        if (isset($send_mms_request)) {
-            $_tempBody = $send_mms_request;
+        if (isset($body)) {
+            $_tempBody = $body;
         }
 
         if ($multipart) {
@@ -1451,10 +2194,10 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {
@@ -1507,17 +2250,15 @@ The recipient number should be in the format &#39;04xxxxxxxx&#39; where x is a d
      *
      * Send SMS
      *
-     * @param  \Telstra_Messaging\Model\SendSMSRequest $send_sms_request A JSON or XML payload containing the recipient&#39;s phone number and text message.
-This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendSMSRequest $payload A JSON or XML payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Telstra_Messaging\Model\MessageSentResponse
+     * @return \Telstra_Messaging\Model\MessageSentResponseSms
      */
-    public function sendSMS($send_sms_request)
+    public function sendSMS($payload)
     {
-        list($response) = $this->sendSMSWithHttpInfo($send_sms_request);
+        list($response) = $this->sendSMSWithHttpInfo($payload);
         return $response;
     }
 
@@ -1526,17 +2267,15 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
      *
      * Send SMS
      *
-     * @param  \Telstra_Messaging\Model\SendSMSRequest $send_sms_request A JSON or XML payload containing the recipient&#39;s phone number and text message.
-This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendSMSRequest $payload A JSON or XML payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
      *
      * @throws \Telstra_Messaging\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Telstra_Messaging\Model\MessageSentResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Telstra_Messaging\Model\MessageSentResponseSms, HTTP status code, HTTP response headers (array of strings)
      */
-    public function sendSMSWithHttpInfo($send_sms_request)
+    public function sendSMSWithHttpInfo($payload)
     {
-        $request = $this->sendSMSRequest($send_sms_request);
+        $request = $this->sendSMSRequest($payload);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1547,7 +2286,7 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
                     "[{$e->getCode()}] {$e->getMessage()}",
                     $e->getCode(),
                     $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
                 );
             }
 
@@ -1569,31 +2308,25 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 201:
-                    if ('\Telstra_Messaging\Model\MessageSentResponse' === '\SplFileObject') {
+                    if ('\Telstra_Messaging\Model\MessageSentResponseSms' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ('\Telstra_Messaging\Model\MessageSentResponse' !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MessageSentResponse', []),
+                        ObjectSerializer::deserialize($content, '\Telstra_Messaging\Model\MessageSentResponseSms', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
+            $returnType = '\Telstra_Messaging\Model\MessageSentResponseSms';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
             } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
+                $content = (string) $responseBody;
             }
 
             return [
@@ -1607,7 +2340,7 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Telstra_Messaging\Model\MessageSentResponse',
+                        '\Telstra_Messaging\Model\MessageSentResponseSms',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1622,16 +2355,14 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
      *
      * Send SMS
      *
-     * @param  \Telstra_Messaging\Model\SendSMSRequest $send_sms_request A JSON or XML payload containing the recipient&#39;s phone number and text message.
-This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendSMSRequest $payload A JSON or XML payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendSMSAsync($send_sms_request)
+    public function sendSMSAsync($payload)
     {
-        return $this->sendSMSAsyncWithHttpInfo($send_sms_request)
+        return $this->sendSMSAsyncWithHttpInfo($payload)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1644,17 +2375,15 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
      *
      * Send SMS
      *
-     * @param  \Telstra_Messaging\Model\SendSMSRequest $send_sms_request A JSON or XML payload containing the recipient&#39;s phone number and text message.
-This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendSMSRequest $payload A JSON or XML payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function sendSMSAsyncWithHttpInfo($send_sms_request)
+    public function sendSMSAsyncWithHttpInfo($payload)
     {
-        $returnType = '\Telstra_Messaging\Model\MessageSentResponse';
-        $request = $this->sendSMSRequest($send_sms_request);
+        $returnType = '\Telstra_Messaging\Model\MessageSentResponseSms';
+        $request = $this->sendSMSRequest($payload);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1664,10 +2393,7 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
                     if ($returnType === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
+                        $content = (string) $responseBody;
                     }
 
                     return [
@@ -1696,19 +2422,17 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
     /**
      * Create request for operation 'sendSMS'
      *
-     * @param  \Telstra_Messaging\Model\SendSMSRequest $send_sms_request A JSON or XML payload containing the recipient&#39;s phone number and text message.
-This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit.
- (required)
+     * @param  \Telstra_Messaging\Model\SendSMSRequest $payload A JSON or XML payload containing the recipient&#39;s phone number and text message. This number can be in international format if preceeded by a &#39;+&#39; or in national format (&#39;04xxxxxxxx&#39;) where x is a digit. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function sendSMSRequest($send_sms_request)
+    protected function sendSMSRequest($payload)
     {
-        // verify the required parameter 'send_sms_request' is set
-        if ($send_sms_request === null || (is_array($send_sms_request) && count($send_sms_request) === 0)) {
+        // verify the required parameter 'payload' is set
+        if ($payload === null || (is_array($payload) && count($payload) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $send_sms_request when calling sendSMS'
+                'Missing the required parameter $payload when calling sendSMS'
             );
         }
 
@@ -1723,8 +2447,8 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
 
         // body params
         $_tempBody = null;
-        if (isset($send_sms_request)) {
-            $_tempBody = $send_sms_request;
+        if (isset($payload)) {
+            $_tempBody = $payload;
         }
 
         if ($multipart) {
@@ -1741,10 +2465,10 @@ This number can be in international format if preceeded by a &#39;+&#39; or in n
         // for model (json/xml)
         if (isset($_tempBody)) {
             // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

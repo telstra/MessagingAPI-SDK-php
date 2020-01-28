@@ -1,0 +1,11 @@
+FROM composer
+
+WORKDIR /app
+
+COPY . .
+
+RUN composer install
+
+RUN composer test
+
+CMD ["php", "BackwardCompatTest.php"]
