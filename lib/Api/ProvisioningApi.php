@@ -12,7 +12,7 @@
 /**
  * Telstra Messaging API
  *
- * The API specification for Telstra Messaging API
+ * The Telstra Messaging API specification
  *
  * The version of the OpenAPI document: 2.2.9
  * 

@@ -1,7 +1,7 @@
 {
     "name": "telstra/messagingapi-sdk-php",
     "version": "1.0.8",
-    "description": "The API specification for Telstra Messaging API",
+    "description": "The Telstra Messaging API specification",
     "keywords": [
         "openapitools",
         "openapi-generator",

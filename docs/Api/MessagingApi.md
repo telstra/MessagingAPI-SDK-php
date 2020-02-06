@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getMMSStatus**](MessagingApi.md#getMMSStatus) | **GET** /messages/mms/{messageid}/status | Get MMS Status
 [**getSMSStatus**](MessagingApi.md#getSMSStatus) | **GET** /messages/sms/{messageId}/status | Get SMS Status
-[**mMSHealthCheck**](MessagingApi.md#mMSHealthCheck) | **GET** /messages/mms/heathcheck | MMS Health Check
+[**mMSHealthCheck**](MessagingApi.md#mMSHealthCheck) | **GET** /messages/mms/healthcheck | MMS Health Check
 [**retrieveMMSReplies**](MessagingApi.md#retrieveMMSReplies) | **GET** /messages/mms | Retrieve MMS Replies
 [**retrieveSMSReplies**](MessagingApi.md#retrieveSMSReplies) | **GET** /messages/sms | Retrieve SMS Replies
-[**sMSHealthCheck**](MessagingApi.md#sMSHealthCheck) | **GET** /messages/sms/heathcheck | SMS Health Check
+[**sMSHealthCheck**](MessagingApi.md#sMSHealthCheck) | **GET** /messages/sms/healthcheck | SMS Health Check
 [**sMSMulti**](MessagingApi.md#sMSMulti) | **POST** /messages/sms/multi | Send Multiple SMS
 [**sendMMS**](MessagingApi.md#sendMMS) | **POST** /messages/mms | Send MMS
 [**sendSMS**](MessagingApi.md#sendSMS) | **POST** /messages/sms | Send SMS
@@ -371,10 +371,15 @@ Send multiple SMS in one API call.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure OAuth2 access token for authorization: auth
+$config = Telstra_Messaging\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
+
 $apiInstance = new Telstra_Messaging\Api\MessagingApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $payload = new \Telstra_Messaging\Model\SendSmsMultiRequest(); // \Telstra_Messaging\Model\SendSmsMultiRequest | A JSON payload containing the recipient's phone number and text message. This number can be in international format if preceeded by a '+' or in national format ('04xxxxxxxx') where x is a digit.
 
@@ -400,7 +405,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[auth](../../README.md#auth)
 
 ### HTTP request headers
 

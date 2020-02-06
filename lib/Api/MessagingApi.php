@@ -12,7 +12,7 @@
 /**
  * Telstra Messaging API
  *
- * The API specification for Telstra Messaging API
+ * The Telstra Messaging API specification
  *
  * The version of the OpenAPI document: 2.2.9
  * 
@@ -847,7 +847,7 @@ class MessagingApi
     protected function mMSHealthCheckRequest()
     {
 
-        $resourcePath = '/messages/mms/heathcheck';
+        $resourcePath = '/messages/mms/healthcheck';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1614,7 +1614,7 @@ class MessagingApi
     protected function sMSHealthCheckRequest()
     {
 
-        $resourcePath = '/messages/sms/heathcheck';
+        $resourcePath = '/messages/sms/healthcheck';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1933,6 +1933,10 @@ class MessagingApi
             }
         }
 
+        // this endpoint requires OAuth (access token)
+        if ($this->config->getAccessToken() !== null) {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {

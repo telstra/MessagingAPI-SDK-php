@@ -13,7 +13,7 @@
 /**
  * Telstra Messaging API
  *
- * The API specification for Telstra Messaging API
+ * The Telstra Messaging API specification
  *
  * The version of the OpenAPI document: 2.2.9
  * 
@@ -86,9 +86,9 @@ class SendSmsMultiRequestTest extends TestCase
     }
 
     /**
-     * Test attribute "notiy_url"
+     * Test attribute "notify_url"
      */
-    public function testPropertyNotiyUrl()
+    public function testPropertyNotifyUrl()
     {
     }
 }

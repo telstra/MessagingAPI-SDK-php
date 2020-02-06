@@ -13,7 +13,7 @@
 /**
  * Telstra Messaging API
  *
- * The API specification for Telstra Messaging API
+ * The Telstra Messaging API specification
  *
  * The version of the OpenAPI document: 2.2.9
  * 
@@ -58,7 +58,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sms_multi' => '\Telstra_Messaging\Model\MessageMulti[]',
-        'notiy_url' => 'string'
+        'notify_url' => 'string'
     ];
 
     /**
@@ -68,7 +68,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sms_multi' => null,
-        'notiy_url' => null
+        'notify_url' => null
     ];
 
     /**
@@ -99,7 +99,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sms_multi' => 'smsMulti',
-        'notiy_url' => 'notiyURL'
+        'notify_url' => 'notifyURL'
     ];
 
     /**
@@ -109,7 +109,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sms_multi' => 'setSmsMulti',
-        'notiy_url' => 'setNotiyUrl'
+        'notify_url' => 'setNotifyUrl'
     ];
 
     /**
@@ -119,7 +119,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sms_multi' => 'getSmsMulti',
-        'notiy_url' => 'getNotiyUrl'
+        'notify_url' => 'getNotifyUrl'
     ];
 
     /**
@@ -183,7 +183,7 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['sms_multi'] = isset($data['sms_multi']) ? $data['sms_multi'] : null;
-        $this->container['notiy_url'] = isset($data['notiy_url']) ? $data['notiy_url'] : null;
+        $this->container['notify_url'] = isset($data['notify_url']) ? $data['notify_url'] : null;
     }
 
     /**
@@ -235,25 +235,25 @@ class SendSmsMultiRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets notiy_url
+     * Gets notify_url
      *
      * @return string|null
      */
-    public function getNotiyUrl()
+    public function getNotifyUrl()
     {
-        return $this->container['notiy_url'];
+        return $this->container['notify_url'];
     }
 
     /**
-     * Sets notiy_url
+     * Sets notify_url
      *
-     * @param string|null $notiy_url Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc. Please refer to the Delivery Status section for more information.  If you are using a domain URL you must include the forward slash at the end of the URL (e.g. http://www.example.com/).
+     * @param string|null $notify_url Contains a URL that will be called once your message has been processed. The status may be delivered, expired, deleted, etc. Please refer to the Delivery Status section for more information.  If you are using a domain URL you must include the forward slash at the end of the URL (e.g. http://www.example.com/).  This is required when `\"receiptOff\"` is missing or `\"receiptOff\":\"false\"`.
      *
      * @return $this
      */
-    public function setNotiyUrl($notiy_url)
+    public function setNotifyUrl($notify_url)
     {
-        $this->container['notiy_url'] = $notiy_url;
+        $this->container['notify_url'] = $notify_url;
 
         return $this;
     }
