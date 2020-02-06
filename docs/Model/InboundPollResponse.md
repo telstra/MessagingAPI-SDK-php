@@ -1,6 +1,7 @@
-# InboundPollResponse
+# # InboundPollResponse
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **string** | message status | [optional] 
@@ -10,6 +11,6 @@ Name | Type | Description | Notes
 **message_id** | **string** | Message Id | [optional] 
 **sent_timestamp** | **string** | The date and time when the message was sent by recipient. | [optional] 
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
 

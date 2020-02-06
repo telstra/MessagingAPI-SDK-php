@@ -1,40 +1,43 @@
 {
-    "name": "Telstra/MessagingAPI-SDK-php",
-    "version": "1.0.6",
-    "description": "",
+    "name": "telstra/messagingapi-sdk-php",
+    "version": "1.0.8",
+    "description": "The Telstra Messaging API specification",
     "keywords": [
         "openapitools",
         "openapi-generator",
+        "openapi",
         "php",
         "sdk",
-        "api",
         "rest",
-        "telstradev"
+        "api"
     ],
-    "homepage": "https://dev.telstra.com",
-    "license": "Apache-2.0",
+    "homepage": "https://openapi-generator.tech",
+    "license": "unlicense",
     "authors": [
         {
-            "name": "developersteve",
-            "homepage": "https://github.com/developersteve"
+            "name": "OpenAPI-Generator contributors",
+            "homepage": "https://openapi-generator.tech"
         }
     ],
     "require": {
-        "php": ">=5.5",
+        "php": ">=7.1",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8",
+        "phpunit/phpunit": "^7.4",
         "squizlabs/php_codesniffer": "~2.6",
-        "friendsofphp/php-cs-fixer": "~1.12"
+        "friendsofphp/php-cs-fixer": "~2.12"
     },
     "autoload": {
         "psr-4": { "Telstra_Messaging\\" : "lib/" }
     },
     "autoload-dev": {
         "psr-4": { "Telstra_Messaging\\" : "test/" }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
